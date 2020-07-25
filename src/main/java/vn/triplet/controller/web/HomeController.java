@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import vn.triplet.bean.UserInfo;
 import vn.triplet.service.UserService;
 
 @Controller(value = "homeControllerOfWeb")
@@ -29,6 +30,7 @@ public class HomeController {
 	
 	@RequestMapping("/register")
 	public String register(Model model) {
+		model.addAttribute("user",new UserInfo());
 		return "views/web/layout/signup-modal";
 	}
 	

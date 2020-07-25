@@ -2,114 +2,129 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
-	<title>Login Page</title>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-<!--===============================================================================================-->	
-	<link rel="icon" type="image/png" th:href="@{assets/web/images/icons/favicon.ico}"/>
+<title>Login Page</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" th:href="@{assets/web/vendor/bootstrap/css/bootstrap.min.css}">
+<link rel="icon" type="image/png"
+	th:href="@{assets/web/images/icons/favicon.ico}" />
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" th:href="@{assets/web/webfonts/fonts/font-awesome-4.7.0/css/font-awesome.min.css}">
+<link rel="stylesheet" type="text/css"
+	th:href="@{assets/web/vendor/bootstrap/css/bootstrap.min.css}">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" th:href="@{assets/web/webfonts/fonts/Linearicons-Free-v1.0.0/icon-font.min.css}">
+<link rel="stylesheet" type="text/css"
+	th:href="@{assets/web/webfonts/fonts/font-awesome-4.7.0/css/font-awesome.min.css}">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" th:href="@{assets/web/vendor/animate/animate.css}">
-<!--===============================================================================================-->	
-	<link rel="stylesheet" type="text/css" th:href="@{assets/web/vendor/css-hamburgers/hamburgers.min.css}">
+<link rel="stylesheet" type="text/css"
+	th:href="@{assets/web/webfonts/fonts/Linearicons-Free-v1.0.0/icon-font.min.css}">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" th:href="@{assets/web/vendor/animsition/css/animsition.min.css}">
+<link rel="stylesheet" type="text/css"
+	th:href="@{assets/web/vendor/animate/animate.css}">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" th:href="@{assets/web/vendor/select2/select2.min.css}">
-<!--===============================================================================================-->	
-	<link rel="stylesheet" type="text/css" th:href="@{assets/web/vendor/daterangepicker/daterangepicker.css}">
+<link rel="stylesheet" type="text/css"
+	th:href="@{assets/web/vendor/css-hamburgers/hamburgers.min.css}">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" th:href="@{assets/web/css/util.css}">
-	<link rel="stylesheet" type="text/css" th:href="@{assets/web/css/main.css}">
-	
-	<link th:href="@{/assets/web/css/fontawesome-all.min.css}"
+<link rel="stylesheet" type="text/css"
+	th:href="@{assets/web/vendor/animsition/css/animsition.min.css}">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css"
+	th:href="@{assets/web/vendor/select2/select2.min.css}">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css"
+	th:href="@{assets/web/vendor/daterangepicker/daterangepicker.css}">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css"
+	th:href="@{assets/web/css/util.css}">
+<link rel="stylesheet" type="text/css"
+	th:href="@{assets/web/css/main.css}">
+
+<link th:href="@{/assets/web/css/fontawesome-all.min.css}"
 	rel="stylesheet">
 <!--===============================================================================================-->
 </head>
 <div layout:fragment="body" style="background-color: #666666;">
-	
+
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
-			
-				<form th:action="welcome" method="post" class="login100-form validate-form">
-				
-					<span class="login100-form-title p-b-43">
-						Login to continue
+
+				<form th:action="welcome" method="post"
+					class="login100-form validate-form">
+
+					<span class="login100-form-title p-b-43"> Login to continue
 					</span>
-					
+					<div th:if="${registersuccess!= null}"
+						class="alert alert-success alert-dismissible alert-autocloseable-success"
+						role="alert">
+						<strong th:text="${registersuccess}"></strong>
+					</div>
 					<div th:if="${error!=null}">
 						<strong><span th:text="${error}"></span></strong>
 					</div>
-					
-					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+
+					<div class="wrap-input100 validate-input"
+						data-validate="Valid email is required: ex@abc.xyz">
 						<input class="input100" type="text" name="email" required="true">
-						<span class="focus-input100"></span>
-						<span class="label-input100">Email</span>
+						<span class="focus-input100"></span> <span class="label-input100">Email</span>
 					</div>
-					
-					
-					<div class="wrap-input100 validate-input" data-validate="Password is required">
-						<input class="input100" type="password" name="password" required="true">
-						<span class="focus-input100"></span>
-						<span class="label-input100">Password</span>
+
+
+					<div class="wrap-input100 validate-input"
+						data-validate="Password is required">
+						<input class="input100" type="password" name="password"
+							required="true"> <span class="focus-input100"></span> <span
+							class="label-input100">Password</span>
 					</div>
 
 					<div class="flex-sb-m w-full p-t-3 p-b-32">
 						<div class="contact100-form-checkbox">
-							<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
-							<label class="label-checkbox100" for="ckb1">
-								Remember me
-							</label>
+							<input class="input-checkbox100" id="ckb1" type="checkbox"
+								name="remember-me"> <label class="label-checkbox100"
+								for="ckb1"> Remember me </label>
 						</div>
 					</div>
-			
+
 					<div class="container-login100-form-btn">
-						<button class="login100-form-btn">
-							Login
-						</button>
+						<button class="login100-form-btn">Login</button>
 					</div>
 					<div class="mt-4">
-									<div class="d-flex justify-content-center links">
-										Don't have an account? <a th:href="@{/register}" class="ml-2">Sign
-											Up</a>
-									</div>
-								</div>
+						<div class="d-flex justify-content-center links">
+							Don't have an account? <a th:href="@{/register}" class="ml-2">Sign
+								Up</a>
+						</div>
+					</div>
 				</form>
 
-				<div class="login100-more"  th:style="'background:url('+@{/assets/web/images/bg01.jpg}+')'">
-				<h1>
-				<a class="navbar-brand" th:href="@{/}"><i class="fa fa-home"></i>Home</a>
+				<div class="login100-more"
+					th:style="'background:url('+@{/assets/web/images/bg01.jpg}+')'">
+					<h1>
+						<a class="navbar-brand" th:href="@{/}"><i class="fa fa-home"></i>Home</a>
 					</h1>
 				</div>
 			</div>
 		</div>
 	</div>
-	
-	
 
-	
-	
-<!--===============================================================================================-->
+
+
+
+
+	<!--===============================================================================================-->
 	<script th:src="@{assets/web/vendor/jquery/jquery-3.2.1.min.js}"></script>
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<script th:src="@{assets/web/vendor/animsition/js/animsition.min.js}"></script>
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<script th:src="@{assets/web/vendor/bootstrap/js/popper.js}"></script>
 	<script th:src="@{assets/web/vendor/bootstrap/js/bootstrap.min.js}"></script>
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<script th:src="@{assets/web/vendor/select2/select2.min.js}"></script>
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<script th:src="@{assets/web/vendor/daterangepicker/moment.min.js}"></script>
-	<script th:src="@{assets/web/vendor/daterangepicker/daterangepicker.js}"></script>
-<!--===============================================================================================-->
+	<script
+		th:src="@{assets/web/vendor/daterangepicker/daterangepicker.js}"></script>
+	<!--===============================================================================================-->
 	<script th:src="@{assets/web/vendor/countdowntime/countdowntime.js}"></script>
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<script th:src="@{assets/web/js/main.js}"></script>
 
 </div>

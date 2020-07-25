@@ -8,5 +8,6 @@ public interface UserDAO extends BaseDAO<Integer, User> {
 	
 	List<User> loadUsers();
 	User findByEmail(String email);
+	boolean checkEmailExist(String email);
 	
 }

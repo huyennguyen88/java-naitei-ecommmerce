@@ -8,4 +8,6 @@ public interface UserService extends BaseService<Integer, User>{
 	
 	List<User> loadUsers();
 	User findByEmailAndPassword(String usermail, String password);
+    boolean checkEmailExist(String email);
+	boolean createUser(User user);
 }
