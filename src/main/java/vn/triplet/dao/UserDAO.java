@@ -7,5 +7,6 @@ import vn.triplet.model.User;
 public interface UserDAO extends BaseDAO<Integer, User> {
 	
 	List<User> loadUsers();
+	User findByEmail(String email);
 	
 }
