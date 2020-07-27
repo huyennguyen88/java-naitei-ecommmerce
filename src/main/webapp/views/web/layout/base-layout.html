@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>TripleT Clothes</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8" />
+<script>
+	addEventListener("load", function() {
+		setTimeout(hideURLbar, 0);
+	}, false);
+
+	function hideURLbar() {
+		window.scrollTo(0, 1);
+	}
+</script>
+<link th:href="@{assets/web/css/bootstrap.css}" rel="stylesheet"
+	type="text/css" media="all">
+
+<!-- shop css -->
+<link th:href="@{/assets/web/css/shop.css}" type="text/css"
+	rel="stylesheet" media="all">
+<link th:href="@{/assets/web/css/owl.carousel.min.css}" rel="stylesheet">
+
+<!-- Owl-Carousel-CSS -->
+<link th:href="@{/assets/web/css/style.css}" rel="stylesheet"
+	type="text/css" media="all">
+
+<!-- Range-slider-css -->
+<link rel="stylesheet" type="text/css"
+	th:href="@{/assets/web/css/jquery-ui1.css}">
+
+<!-- flexslider-css -->
+<link rel="stylesheet" th:href="@{/assets/web/css/flexslider.css}"
+	type="text/css" media="screen" />
+<link th:href="@{/assets/web/css/style.css}" type="text/css"
+	rel="stylesheet" media="all">
+
+<!-- font-awesome icons -->
+<link th:href="@{/assets/web/css/fontawesome-all.min.css}"
+	rel="stylesheet">
+
+<!-- online-fonts -->
+<link
+	th:href="@{//fonts.googleapis.com/css?family=Elsie+Swash+Caps:400,900}"
+	rel="stylesheet">
+<link
+	th:href="@{//fonts.googleapis.com/css?family=Source+Sans+Pro:200,200i,300,300i,400,400i,600,600i,700,700i,900,900i}"
+	rel="stylesheet">
+<!-- //online-fonts -->
+</head>
+
+<body>
+	<header>
+		<div th:replace="views/web/layout/header:: header"></div>
+	</header>
+
+	<div layout:fragment="body"></div>
+
+	<footer>
+		<div th:replace="views/web/layout/footer :: footer"></div>
+	</footer>
+
+	<div th:replace="views/web/layout/signup-modal :: signup-modal"></div>
+
+	<div th:replace="views/web/layout/signin-modal :: signin-modal"></div>
+
+	<!-- js -->
+	<script th:src="@{/assets/web/js/jquery-2.2.3.min.js}"></script>
+
+	<!-- script for show signin and signup modal -->
+	<script>
+		$(document).ready(function() {
+			$("#myModal_btn").modal();
+		});
+	</script>
+
+	<!-- smooth dropdown -->
+	<script>
+		$(document).ready(
+				function() {
+					$('ul li.dropdown').hover(
+							function() {
+								$(this).find('.dropdown-menu').stop(true, true)
+										.delay(200).fadeIn(200);
+							},
+							function() {
+								$(this).find('.dropdown-menu').stop(true, true)
+										.delay(200).fadeOut(200);
+							});
+				});
+	</script>
+
+	<!-- script for password match -->
+	<script>
+		window.onload = function() {
+			document.getElementById("password1").onchange = validatePassword;
+			document.getElementById("password2").onchange = validatePassword;
+		}
+
+		function validatePassword() {
+			var pass2 = document.getElementById("password2").value;
+			var pass1 = document.getElementById("password1").value;
+			if (pass1 != pass2)
+				document.getElementById("password2").setCustomValidity(
+						"Passwords Don't Match");
+			else
+				document.getElementById("password2").setCustomValidity('');
+			//empty string means no validation error
+		}
+	</script>
+
+	<!-- Banner Responsiveslides -->
+	<script th:src="@{/assets/web/js/responsiveslides.min.js}"></script>
+	<script>
+		// You can also use "$(window).load(function() {"
+		$(function() {
+			// Slideshow 4
+			$("#slider3").responsiveSlides({
+				auto : false,
+				pager : true,
+				nav : false,
+				speed : 500,
+				namespace : "callbacks",
+				before : function() {
+					$('.events').append("<li>before event fired.</li>");
+				},
+				after : function() {
+					$('.events').append("<li>after event fired.</li>");
+				}
+			});
+
+		});
+	</script>
+
+	<!-- Product slider Owl-Carousel-JavaScript -->
+	<script th:src="@{/assets/web/js/owl.carousel.js}"></script>
+	<script>
+		var owl = $('.owl-carousel');
+		owl.owlCarousel({
+			items : 4,
+			loop : false,
+			margin : 10,
+			autoplay : false,
+			autoplayTimeout : 5000,
+			autoplayHoverPause : false,
+			responsive : {
+				320 : {
+					items : 1,
+				},
+				568 : {
+					items : 2,
+				},
+				991 : {
+					items : 3,
+				},
+				1050 : {
+					items : 4
+				}
+			}
+		});
+	</script>
+	
+	<!-- cart-js -->
+	<script th:src="@{/assets/web/js/minicart.js}">
+		
+	</script>
+	<script>
+		hub.render();
+
+		hub.cart.on('new_checkout', function(evt) {
+			var items, len, i;
+
+			if (this.subtotal() > 0) {
+				items = this.items();
+
+				for (i = 0, len = items.length; i < len; i++) {
+				}
+			}
+		});
+	</script>
+
+	
+	<!-- price range (top products) -->
+	<script th:src="@{/assets/web/js/jquery-ui.js}"></script>
+	<script>
+		//<![CDATA[ 
+		$(window).load(
+				function() {
+					$("#slider-range").slider(
+							{
+								range : true,
+								min : 0,
+								max : 9000,
+								values : [ 50, 6000 ],
+								slide : function(event, ui) {
+									$("#amount").val(
+											"$" + ui.values[0] + " - $"
+													+ ui.values[1]);
+								}
+							});
+					$("#amount").val(
+							"$" + $("#slider-range").slider("values", 0)
+									+ " - $"
+									+ $("#slider-range").slider("values", 1));
+
+				}); //]]>
+	</script>
+
+	
+	<!-- start-smooth-scrolling -->
+	<script th:src="@{/assets/web/js/move-top.js}"></script>
+	<script th:src="@{/assets/web/js/easing.js}"></script>
+	<script>
+		jQuery(document).ready(function($) {
+			$(".scroll").click(function(event) {
+				event.preventDefault();
+
+				$('html,body').animate({
+					scrollTop : $(this.hash).offset().top
+				}, 1000);
+			});
+		});
+	</script>
+
+	
+	<!-- smooth-scrolling-of-move-up -->
+	<script>
+		$(document).ready(function() {
+			/*
+			var defaults = {
+			    containerID: 'toTop', // fading element id
+			    containerHoverID: 'toTopHover', // fading element hover id
+			    scrollSpeed: 1200,
+			    easingType: 'linear' 
+			};
+			 */
+
+			$().UItoTop({
+				easingType : 'easeOutQuart'
+			});
+
+		});
+	</script>
+	<script th:src="@{/assets/web/js/SmoothScroll.min.js}"></script>
+	
+	<!-- FlexSlider -->
+	<script th:src="@{/assets/web/js/jquery.flexslider.js}"></script>
+	<script>
+	    // Can also be used with $(document).ready()
+	    $(window).load(function () {
+	        $('.flexslider1').flexslider({
+	            animation: "slide",
+	            controlNav: "thumbnails"
+	        });
+	    });
+	</script>
+
+	<!-- zoom -->
+	<script th:src="@{/assets/web/js/imagezoom.js}"></script>
+
+
+
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script th:src="@{/assets/web/js/bootstrap.js}"></script>
+
+</body>
+</html>
