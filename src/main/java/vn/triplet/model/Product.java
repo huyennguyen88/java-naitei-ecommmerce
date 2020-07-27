@@ -1,7 +1,6 @@
 package vn.triplet.model;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -68,10 +67,10 @@ public class Product {
 	private Category category;
 
 	@OneToMany(mappedBy = "product")
-	private List<OrderItem> orderItems = new ArrayList<>();
+	private List<OrderItem> orderItems;
 
 	@OneToMany(mappedBy = "product")
-	private List<Rate> rates = new ArrayList<Rate>();
+	private List<Rate> rates;
 
 	public int getId() {
 		return id;
