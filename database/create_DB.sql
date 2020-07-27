@@ -54,7 +54,7 @@ CREATE TABLE `Categories` (
 );
 
 CREATE TABLE `OrderItems` (
-	`id` INT NOT NULL,
+	`id` INT NOT NULL AUTO_INCREMENT,
 	`order_id` INT NOT NULL,
 	`product_id` INT NOT NULL,
 	`quantity` INT NOT NULL,
@@ -87,9 +87,9 @@ CREATE TABLE `Suggests` (
 	PRIMARY KEY (`id`)
 );
 
-ALTER TABLE `Products` ADD CONSTRAINT `Products_fk0` FOREIGN KEY (`category_id`) REFERENCES `Categories`(`id`) on delete cascade;
+ALTER TABLE `Products` ADD CONSTRAINT `Products_fk0` FOREIGN KEY (`category_id`) REFERENCES `Categories`(`id`);
 
-ALTER TABLE `Categories` ADD CONSTRAINT `Categories_fk0` FOREIGN KEY (`parent_id`) REFERENCES `Categories`(`id`) on delete cascade;
+ALTER TABLE `Categories` ADD CONSTRAINT `Categories_fk0` FOREIGN KEY (`parent_id`) REFERENCES `Categories`(`id`);
 
 ALTER TABLE `Orders` ADD CONSTRAINT `Orders_fk0` FOREIGN KEY (`user_id`) REFERENCES `Users`(`id`);
 
@@ -102,3 +102,5 @@ ALTER TABLE `Rates` ADD CONSTRAINT `Rates_fk0` FOREIGN KEY (`product_id`) REFERE
 ALTER TABLE `Rates` ADD CONSTRAINT `Rates_fk1` FOREIGN KEY (`user_id`) REFERENCES `Users`(`id`);
 
 ALTER TABLE `Suggests` ADD CONSTRAINT `Suggests_fk0` FOREIGN KEY (`user_id`) REFERENCES `Users`(`id`);
+
+
