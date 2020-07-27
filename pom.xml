@@ -1,3 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -13,7 +15,6 @@
 		<thymeleaf-layout-dialect.version>2.4.1</thymeleaf-layout-dialect.version>
 		<log4j.version>1.2.17</log4j.version>
 		<hibernate.version>5.4.3.Final</hibernate.version>
-		<aspectj.version>1.6.10</aspectj.version>
 		<dbcp.version>1.4</dbcp.version>
 		<servlet-api>3.1.0</servlet-api>
 		<mysql-connector-java>8.0.11</mysql-connector-java>
@@ -30,12 +31,25 @@
 			<scope>test</scope>
 		</dependency>
 
-		<!-- Hiberante -->
+		<!-- Hibernate -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
 			<version>${hibernate.version}</version>
 		</dependency>
+
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>${hibernate.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-c3p0</artifactId>
+			<version>${hibernate.version}</version>
+		</dependency>
+
 
 		<!-- Spring MVC Dependency -->
 		<dependency>
@@ -100,13 +114,6 @@
 			<version>3.5</version>
 		</dependency>
 
-		<!-- AspectJ -->
-		<dependency>
-			<groupId>org.aspectj</groupId>
-			<artifactId>aspectjrt</artifactId>
-			<version>${aspectj.version}</version>
-		</dependency>
-
 		<!-- Servlet Dependency -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -145,10 +152,6 @@
 	<build>
 		<finalName>triplet</finalName>
 		<plugins>
-			<!-- <plugin> <artifactId>maven-war-plugin</artifactId> <version>${maven-war-plugin.version}</version> 
-				<configuration> <warSourceDirectory>WebContent</warSourceDirectory> <failOnMissingWebXml>false</failOnMissingWebXml> 
-				</configuration> </plugin> -->
-
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
