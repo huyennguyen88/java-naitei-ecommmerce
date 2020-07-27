@@ -1,6 +1,5 @@
 package vn.triplet.model;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -45,10 +44,10 @@ public class Category {
 	private Category parent;
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "parent")
-	private List<Category> sub_categories = new ArrayList<>();
+	private List<Category> sub_categories;
 	
 	@OneToMany(fetch = FetchType.LAZY,mappedBy = "category")
-	private List<Product> products = new ArrayList<>();
+	private List<Product> products;
 
 	public int getId() {
 		return id;

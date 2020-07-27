@@ -1,6 +1,5 @@
 package vn.triplet.model;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -70,13 +69,13 @@ public class User {
 	private Date delete_time;
 
 	@OneToMany(mappedBy = "user")
-	private List<Rate> rates = new ArrayList<>();
+	private List<Rate> rates;
 
 	@OneToMany(mappedBy = "user")
-	private List<Suggest> suggests = new ArrayList<>();
+	private List<Suggest> suggests;
 
 	@OneToMany(mappedBy = "user")
-	private List<Order> orders = new ArrayList<>();
+	private List<Order> orders;
 
 	public int getId() {
 		return id;

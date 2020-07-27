@@ -1,6 +1,5 @@
 package vn.triplet.model;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -62,7 +61,7 @@ public class Order {
 	private Date update_time;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "order")
-	private List<OrderItem> orderItems = new ArrayList<>();
+	private List<OrderItem> orderItems;
 
 	public int getId() {
 		return id;
