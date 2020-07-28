@@ -7,5 +7,5 @@ import vn.triplet.model.User;
 public interface UserService extends BaseService<Integer, User>{
 	
 	List<User> loadUsers();
-	
+	User findByEmailAndPassword(String usermail, String password);
 }

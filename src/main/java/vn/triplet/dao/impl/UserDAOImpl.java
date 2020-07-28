@@ -42,4 +42,10 @@ public class UserDAOImpl extends GenericDAO<Integer, User> implements UserDAO {
 	public List<User> loadUsers() {
 		return getSession().createQuery("from User").getResultList();
 	}
+
+	@Override
+	public User findByEmail(String email) {
+		return (User)getSession().createQuery("from User where email=: email")
+				.setParameter("email", email).uniqueResult();
+	}
 }

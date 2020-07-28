@@ -48,11 +48,24 @@
 			</form>
 			<!-- search form -->
 			<div class="nav-icon d-flex">
-				<!-- sigin and sign up -->
-				<a class="text-dark login_btn align-self-center mx-3"
-					href="#myModal_btn" data-toggle="modal" data-target="#myModal_btn">
+			<!-- sigin and sign up -->
+			<span th:if= "${session.currentUser}==null" class="rd-nav-item"><a class="text-dark login_btn align-self-center mx-3"
+					th:href="@{/login}" >
 					<i class="far fa-user"></i>
-				</a>
+			</a></span>
+			
+			<div th:if= "${session.currentUser}!=null" >
+			<ul class="nav nav-tabs">
+			<li class="nav-item dropdown ml-auto">
+            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" th:text="${msg}"></a>
+            <div  class="dropdown-menu dropdown-menu-right">
+               <a class="dropdown-item" th:if= "${session.roleUser}==1"  th:href="'users/' + ${session.currentUser}">Profile</a>
+               <a class="dropdown-item" th:if= "${session.roleUser}==0"  th:href="@{/admin}">Dashboard</a>
+               <a class="dropdown-item" th:href="@{/logout}">Logout</a>
+			</div>
+			</li>
+			</ul>
+			</div>
 				<!-- sigin and sign up -->
 				<!-- shopping cart -->
 				<div class="cart-mainf">

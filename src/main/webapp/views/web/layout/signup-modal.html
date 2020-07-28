@@ -1,65 +1,117 @@
-
-<!-- sign up Modal -->
-<div th:fragment="signup-modal" class="modal fade" id="myModal_btn" tabindex="-1" role="dialog"
-	aria-labelledby="myModal_btn" aria-hidden="true">
-	<div class="agilemodal-dialog modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title">Register Now</h5>
-				<button type="button" class="close" data-dismiss="modal"
-					aria-label="Close">
-					<span aria-hidden="true">×</span>
-				</button>
-			</div>
-			<div class="modal-body pt-3 pb-5 px-sm-5">
-				<div class="row">
-					<div class="col-md-6 mx-auto align-self-center">
-						<img th:src="@{/assets/web/images/p3.png}" class="img-fluid" alt="login_image" />
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+	<title>Register Page</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" th:href="@{assets/web/images/icons/favicon.ico}"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" th:href="@{assets/web/vendor/bootstrap/css/bootstrap.min.css}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" th:href="@{assets/web/webfonts/fonts/font-awesome-4.7.0/css/font-awesome.min.css}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" th:href="@{assets/web/webfonts/fonts/Linearicons-Free-v1.0.0/icon-font.min.css}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" th:href="@{assets/web/vendor/animate/animate.css}">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" th:href="@{assets/web/vendor/css-hamburgers/hamburgers.min.css}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" th:href="@{assets/web/vendor/animsition/css/animsition.min.css}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" th:href="@{assets/web/vendor/select2/select2.min.css}">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" th:href="@{assets/web/vendor/daterangepicker/daterangepicker.css}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" th:href="@{assets/web/css/util.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{assets/web/css/main.css}">
+	
+	<link th:href="@{/assets/web/css/fontawesome-all.min.css}"
+	rel="stylesheet">
+<!--===============================================================================================-->
+</head>
+<div layout:fragment="body" style="background-color: #666666;">
+	
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100">
+			
+				<form th:action="registerProcess" method="post" th:object="${userInfo}"
+				 class="login100-form validate-form">
+				
+					<span class="login100-form-title p-b-45">
+						Register
+					</span>
+					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+						<input class="input100" th:field="*{name}"
+						 type="text" name="name" required="true">
+						<span class="focus-input100"></span>
+						<span class="label-input100">Name</span>
 					</div>
-					<div class="col-md-6">
-						<form action="#" method="post">
-							<div class="form-group">
-								<label for="recipient-name1" class="col-form-label">Your
-									Name</label> <input type="text" class="form-control" placeholder=" "
-									name="Name" id="recipient-name1" required="">
-							</div>
-							<div class="form-group">
-								<label for="recipient-email" class="col-form-label">Email</label>
-								<input type="email" class="form-control" placeholder=" "
-									name="Email" id="recipient-email" required="">
-							</div>
-							<div class="form-group">
-								<label for="password1" class="col-form-label">Password</label> <input
-									type="password" class="form-control" placeholder=" "
-									name="Password" id="password1" required="">
-							</div>
-							<div class="form-group">
-								<label for="password2" class="col-form-label">Confirm
-									Password</label> <input type="password" class="form-control"
-									placeholder=" " name="Confirm Password" id="password2"
-									required="">
-							</div>
-							<div class="sub-w3l">
-								<div class="sub-agile">
-									<input type="checkbox" id="brand2" value=""> <label
-										for="brand2" class="mb-3"> <span></span>I Accept to
-										the Terms & Conditions
-									</label>
+					
+					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+						<input class="input100" th:field="*{email}" type="text" name="email" required="true">
+						<span class="focus-input100"></span>
+						<span class="label-input100">Email</span>
+					</div>
+					
+					
+					<div class="wrap-input100 validate-input" data-validate="Password is required">
+						<input class="input100" type="password" th:field="*{password}"  name="password" required="true">
+						<span class="focus-input100"></span>
+						<span class="label-input100">Password</span>
+					</div>
+	
+					<div class="wrap-input100 validate-input" data-validate="Password is required">
+						<input class="input100" type="password" th:field="*{confirmpassword}" name="confirmpassword" required="true">
+						<span class="focus-input100"></span>
+						<span class="label-input100">Confirm Password</span>
+					</div>
+					
+			
+					<div class="container-login100-form-btn">
+						<button class="login100-form-btn">
+							Register
+						</button>
+					</div>
+					<div class="mt-4">
+									<div class="d-flex justify-content-center links">
+										Do you have an account? <a th:href="@{/login}" class="ml-2">Sign
+											In</a>
+									</div>
 								</div>
-							</div>
-							<div class="right-w3l">
-								<input type="submit" class="form-control" value="Register">
-							</div>
-						</form>
-						<p class="text-center mt-3">
-							Already a member? <a href="#" data-toggle="modal"
-								data-target="#exampleModal1" class="text-dark login_btn">
-								Login Now</a>
-						</p>
-					</div>
+				</form>
+
+				<div class="login100-more"  th:style="'background:url('+@{/assets/web/images/bg01.jpg}+')'">
+				<h1>
+				<a class="navbar-brand" th:href="@{/}"><i class="fa fa-home"></i>Home</a>
+					</h1>
 				</div>
 			</div>
 		</div>
 	</div>
+	
+	
+
+	
+	
+<!--===============================================================================================-->
+	<script th:src="@{assets/web/vendor/jquery/jquery-3.2.1.min.js}"></script>
+<!--===============================================================================================-->
+	<script th:src="@{assets/web/vendor/animsition/js/animsition.min.js}"></script>
+<!--===============================================================================================-->
+	<script th:src="@{assets/web/vendor/bootstrap/js/popper.js}"></script>
+	<script th:src="@{assets/web/vendor/bootstrap/js/bootstrap.min.js}"></script>
+<!--===============================================================================================-->
+	<script th:src="@{assets/web/vendor/select2/select2.min.js}"></script>
+<!--===============================================================================================-->
+	<script th:src="@{assets/web/vendor/daterangepicker/moment.min.js}"></script>
+	<script th:src="@{assets/web/vendor/daterangepicker/daterangepicker.js}"></script>
+<!--===============================================================================================-->
+	<script th:src="@{assets/web/vendor/countdowntime/countdowntime.js}"></script>
+<!--===============================================================================================-->
+	<script th:src="@{assets/web/js/main.js}"></script>
+
 </div>
-<!-- //signup modal -->
+</html>

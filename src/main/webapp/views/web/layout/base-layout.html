@@ -60,19 +60,12 @@
 		<div th:replace="views/web/layout/footer :: footer"></div>
 	</footer>
 
-	<div th:replace="views/web/layout/signup-modal :: signup-modal"></div>
+	<!-- <div th:replace="views/web/layout/signup-modal :: signup-modal"></div>
 
-	<div th:replace="views/web/layout/signin-modal :: signin-modal"></div>
+	<div th:replace="views/web/layout/signin-modal :: signin-modal"></div> -->
 
 	<!-- js -->
 	<script th:src="@{/assets/web/js/jquery-2.2.3.min.js}"></script>
-
-	<!-- script for show signin and signup modal -->
-	<script>
-		$(document).ready(function() {
-			$("#myModal_btn").modal();
-		});
-	</script>
 
 	<!-- smooth dropdown -->
 	<script>
@@ -89,7 +82,6 @@
 							});
 				});
 	</script>
-
 	<!-- script for password match -->
 	<script>
 		window.onload = function() {
@@ -108,7 +100,6 @@
 			//empty string means no validation error
 		}
 	</script>
-
 	<!-- Banner Responsiveslides -->
 	<script th:src="@{/assets/web/js/responsiveslides.min.js}"></script>
 	<script>
@@ -131,7 +122,6 @@
 
 		});
 	</script>
-
 	<!-- Product slider Owl-Carousel-JavaScript -->
 	<script th:src="@{/assets/web/js/owl.carousel.js}"></script>
 	<script>
