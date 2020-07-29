@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -62,7 +63,7 @@ public class Product {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date delete_time;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "category_id", nullable = false)
 	private Category category;
 
@@ -175,5 +176,15 @@ public class Product {
 	public void setRates(List<Rate> rates) {
 		this.rates = rates;
 	}
+
+	@Override
+	public String toString() {
+		return "Product [id=" + id + ", name=" + name + ", image=" + image + ", quantity=" + quantity + ", price="
+				+ price + "]";
+	}
+
+	
+	
+
 
 }

@@ -13,4 +13,10 @@
 	<bean id="UserDAO" class="vn.triplet.dao.impl.UserDAOImpl">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
+	
+	<bean id="ProductDAO" class="vn.triplet.dao.impl.ProductDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	
 </beans>
