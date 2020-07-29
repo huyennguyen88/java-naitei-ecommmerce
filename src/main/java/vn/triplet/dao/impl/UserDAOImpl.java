@@ -18,19 +18,6 @@ public class UserDAOImpl extends GenericDAO<Integer, User> implements UserDAO {
 	public UserDAOImpl(SessionFactory sessionFactory) {
 		setSessionFactory(sessionFactory);
 	}
-
-	@Override
-	public void delete(User entity) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public User saveOrUpdate(User entity) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	@Override
 	public User findById(Serializable key) {
 		// TODO Auto-generated method stub
@@ -48,4 +35,14 @@ public class UserDAOImpl extends GenericDAO<Integer, User> implements UserDAO {
 		return (User)getSession().createQuery("from User where email=: email")
 				.setParameter("email", email).uniqueResult();
 	}
+
+	@Override
+	public boolean checkEmailExist(String email) {
+		User user =(User)getSession().createQuery("from User where email=: email")
+				.setParameter("email", email).uniqueResult();
+		if(user!=null) return true;
+		return false;
+	}
+
+	
 }

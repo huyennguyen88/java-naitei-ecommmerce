@@ -57,7 +57,7 @@
 			<div th:if= "${session.currentUser}!=null" >
 			<ul class="nav nav-tabs">
 			<li class="nav-item dropdown ml-auto">
-            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" th:text="${msg}"></a>
+            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" th:text="${session.msg}"></a>
             <div  class="dropdown-menu dropdown-menu-right">
                <a class="dropdown-item" th:if= "${session.roleUser}==1"  th:href="'users/' + ${session.currentUser}">Profile</a>
                <a class="dropdown-item" th:if= "${session.roleUser}==0"  th:href="@{/admin}">Dashboard</a>

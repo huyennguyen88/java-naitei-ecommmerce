@@ -9,6 +9,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import vn.triplet.service.impl.UserServiceImpl;
 import vn.triplet.model.User;
+import vn.triplet.model.User.Role;
 import vn.triplet.service.UserService;
 public class UserServiceImpl extends BaseServiceImpl implements UserService {
 
@@ -24,8 +25,12 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
 
 	@Override
 	public User saveOrUpdate(User entity) {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			return getUserDAO().saveOrUpdate(entity);
+		} catch (Exception e) {
+			logger.error(e);
+			throw e;
+		}
 	}
 
 	@Override
@@ -54,9 +59,38 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
 		}catch(Exception e)
 		{
 			return null;
-		}
-			
+		}	
 
+	}
+
+	@Override
+	public boolean checkEmailExist(String email) {
+		try {		
+			//true: exist
+			return getUserDAO().checkEmailExist(email);
+		}catch(Exception e)
+		{
+			
+			logger.error(e);
+			
+		}
+		return false;
+	}
+
+	@Override
+	public boolean createUser(User user) {
+		try
+		{
+			if(checkEmailExist(user.getEmail())) return false;
+			user.setRole(Role.USER);
+			getUserDAO().saveOrUpdate(user);
+			return true;
+			
+		}catch(Exception ex)
+		{
+			logger.error("Error in saveUserAfterRegister: " + ex.getMessage());
+			throw ex;
+		}
 	}
 
 }

@@ -10,8 +10,13 @@
 			<ul class="rslides" id="slider3">
 				<li class="banner">
 					<div class="container">
+						<div th:if="${loginsuccess!= null}"
+							class="alert alert-success alert-dismissible alert-autocloseable-success"
+							role="alert">
+							<strong th:text="${loginsuccess}"></strong>
+						</div>
 						<h3 class="agile_btxt">
-							<span>T</span>ipple<span>T</span> clothes
+							<span>T</span>riple<span>T</span> clothes
 						</h3>
 						<h4 class="w3_bbot">shop exclusive clothing</h4>
 						<div class="slider-info mt-sm-5">
@@ -35,8 +40,8 @@
 									</div>
 								</div>
 								<p class="text-uppercase py-2">on special sale</p>
-								<a class="btn btn-primary mt-3 text-capitalize" th:href="@{/shop}"
-									role="button">Shop now</a>
+								<a class="btn btn-primary mt-3 text-capitalize"
+									th:href="@{/shop}" role="button">Shop now</a>
 							</div>
 						</div>
 					</div>
@@ -131,7 +136,8 @@
 							<!-- card -->
 							<div class="card product-men p-3">
 								<div class="men-thumb-item">
-									<img th:src="@{/assets/web/images/pf1.jpg}" alt="img" class="card-img-top">
+									<img th:src="@{/assets/web/images/pf1.jpg}" alt="img"
+										class="card-img-top">
 									<div class="men-cart-pro">
 										<div class="inner-men-cart-pro">
 											<a th:href="@{/single}" class="link-product-add-cart">Quick
@@ -169,7 +175,8 @@
 							<!-- card -->
 							<div class="card product-men p-3">
 								<div class="men-thumb-item">
-									<img th:src="@{/assets/web/images/pf2.jpg}" alt="img" class="card-img-top">
+									<img th:src="@{/assets/web/images/pf2.jpg}" alt="img"
+										class="card-img-top">
 									<div class="men-cart-pro">
 										<div class="inner-men-cart-pro">
 											<a th:href="@{/single}" class="link-product-add-cart">Quick
@@ -207,7 +214,8 @@
 							<!-- card -->
 							<div class="card product-men p-3">
 								<div class="men-thumb-item">
-									<img th:src="@{/assets/web/images/pf3.jpg}" alt="img" class="card-img-top">
+									<img th:src="@{/assets/web/images/pf3.jpg}" alt="img"
+										class="card-img-top">
 									<div class="men-cart-pro">
 										<div class="inner-men-cart-pro">
 											<a th:href="@{/single}" class="link-product-add-cart">Quick
@@ -245,7 +253,8 @@
 							<!-- card -->
 							<div class="card product-men p-3">
 								<div class="men-thumb-item">
-									<img th:src="@{/assets/web/images/pf9.jpg}" alt="img" class="card-img-top">
+									<img th:src="@{/assets/web/images/pf9.jpg}" alt="img"
+										class="card-img-top">
 									<div class="men-cart-pro">
 										<div class="inner-men-cart-pro">
 											<a th:href="@{/single}" class="link-product-add-cart">Quick
@@ -283,7 +292,8 @@
 							<!-- card -->
 							<div class="card product-men p-3">
 								<div class="men-thumb-item">
-									<img th:src="@{/assets/web/images/pf11.jpg}" alt="img" class="card-img-top">
+									<img th:src="@{/assets/web/images/pf11.jpg}" alt="img"
+										class="card-img-top">
 									<div class="men-cart-pro">
 										<div class="inner-men-cart-pro">
 											<a th:href="@{/single}" class="link-product-add-cart">Quick
@@ -318,27 +328,22 @@
 						</div>
 						<div class="item">
 							<div class="product-men p-3 text-center">
-								<img th:src="@{/assets/web/images/p2.png}" class="img-responsive" alt="" /> <a
-									href="women.html" class="btn btn-lg bg-info text-white">view
-									more</a>
+								<img th:src="@{/assets/web/images/p2.png}"
+									class="img-responsive" alt="" /> <a href="women.html"
+									class="btn btn-lg bg-info text-white">view more</a>
 							</div>
 						</div>
 					</div>
 				</div>
 
 				<div role="tabpanel" class="tab-pane fade" id="men"
-					aria-labelledby="men-tab">
-
-				</div>
+					aria-labelledby="men-tab"></div>
 
 				<div role="tabpanel" class="tab-pane fade" id="girl"
-					aria-labelledby="girl-tab">
-
-				</div>
+					aria-labelledby="girl-tab"></div>
 
 				<div role="tabpanel" class="tab-pane fade" id="boy"
-					aria-labelledby="boy-tab">
-				</div>
+					aria-labelledby="boy-tab"></div>
 
 			</div>
 		</div>

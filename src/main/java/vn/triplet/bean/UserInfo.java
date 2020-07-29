@@ -1,5 +1,6 @@
 package vn.triplet.bean;
 
+import vn.triplet.model.User;
 public class UserInfo {
 	
 	private Integer id;
@@ -58,5 +59,13 @@ public class UserInfo {
 		this.name=name;
 		this.email=email;
 		this.password=password;
+	}
+
+	public User convertToUser() {
+		User user = new User();
+		user.setName(this.getName());
+		user.setEmail(this.getEmail());
+		user.setPassword_digest(this.getPassword().trim());
+		return user;
 	}
 }
