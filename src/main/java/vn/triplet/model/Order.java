@@ -1,5 +1,6 @@
 package vn.triplet.model;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -62,6 +63,9 @@ public class Order {
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "order")
 	private List<OrderItem> orderItems;
+
+	@Column(name = "total", nullable = false)
+	private BigDecimal total;
 
 	public int getId() {
 		return id;
@@ -135,4 +139,11 @@ public class Order {
 		this.orderItems = orderItems;
 	}
 
+	public BigDecimal getTotal() {
+		return total;
+	}
+
+	public void setTotal(BigDecimal total) {
+		this.total = total;
+	}
 }

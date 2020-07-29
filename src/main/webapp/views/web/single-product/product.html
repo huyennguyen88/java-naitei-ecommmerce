@@ -21,10 +21,11 @@
 					<div class="grid images_3_of_2">
 						<div class="flexslider1">
 							<ul class="slides">
-								<li th:each="image : ${product.images}" th:data-thumb="@{'/assets/images/'+ ${image}}">
+								<li th:each="image : ${product.images}"
+									th:data-thumb="@{'/assets/images/'+ ${image}}">
 									<div class="thumb-image">
-										<img th:src="@{'/assets/images/'+ ${image}}" data-imagezoom="true" alt=" "
-											class="img-fluid">
+										<img th:src="@{'/assets/images/'+ ${image}}"
+											data-imagezoom="true" alt=" " class="img-fluid">
 									</div>
 								</li>
 							</ul>
@@ -39,34 +40,49 @@
 
 						<div>
 							<!--First Star-->
-							<i class="fa fa-star-o checkedStar" th:if="${product.rate_avg == 0}"></i>
-							<i class="fa fa-star-half-o checkedStar" th:if="${product.rate_avg > 0 && product.rate_avg < 1}"></i>
-							<i class="fa fa-star checkedStar" th:if="${product.rate_avg >= 1}"></i>
+							<i class="fa fa-star-o checkedStar"
+								th:if="${product.rate_avg == 0}"></i> <i
+								class="fa fa-star-half-o checkedStar"
+								th:if="${product.rate_avg > 0 && product.rate_avg < 1}"></i> <i
+								class="fa fa-star checkedStar" th:if="${product.rate_avg >= 1}"></i>
 							<!--Second Star-->
-							<i class="fa fa-star-o checkedStar" th:if="${product.rate_avg <= 1}"></i>
-							<i class="fa fa-star-half-o checkedStar" th:if="${product.rate_avg > 1 && product.rate_avg < 2}"></i>
-							<i class="fa fa-star checkedStar" th:if="${product.rate_avg >= 2}"></i>
+							<i class="fa fa-star-o checkedStar"
+								th:if="${product.rate_avg <= 1}"></i> <i
+								class="fa fa-star-half-o checkedStar"
+								th:if="${product.rate_avg > 1 && product.rate_avg < 2}"></i> <i
+								class="fa fa-star checkedStar" th:if="${product.rate_avg >= 2}"></i>
 							<!--Third Star-->
-							<i class="fa fa-star-o checkedStar" th:if="${product.rate_avg <= 2}"></i>
-							<i class="fa fa-star-half-o checkedStar" th:if="${product.rate_avg > 2 && product.rate_avg < 3}"></i>
-							<i class="fa fa-star checkedStar" th:if="${product.rate_avg >= 3}"></i>
+							<i class="fa fa-star-o checkedStar"
+								th:if="${product.rate_avg <= 2}"></i> <i
+								class="fa fa-star-half-o checkedStar"
+								th:if="${product.rate_avg > 2 && product.rate_avg < 3}"></i> <i
+								class="fa fa-star checkedStar" th:if="${product.rate_avg >= 3}"></i>
 							<!--Fourth Star-->
-							<i class="fa fa-star-o checkedStar" th:if="${product.rate_avg <= 3}"></i>
-							<i class="fa fa-star-half-o checkedStar" th:if="${product.rate_avg > 3 && product.rate_avg < 4}"></i>
-							<i class="fa fa-star checkedStar" th:if="${product.rate_avg >= 4}"></i>
+							<i class="fa fa-star-o checkedStar"
+								th:if="${product.rate_avg <= 3}"></i> <i
+								class="fa fa-star-half-o checkedStar"
+								th:if="${product.rate_avg > 3 && product.rate_avg < 4}"></i> <i
+								class="fa fa-star checkedStar" th:if="${product.rate_avg >= 4}"></i>
 							<!--Fifth Star-->
-							<i class="fa fa-star-o checkedStar" th:if="${product.rate_avg <= 4}"></i>
-							<i class="fa fa-star-half-o checkedStar" th:if="${product.rate_avg > 4 && product.rate_avg < 5}"></i>
-							<i class="fa fa-star checkedStar" th:if="${product.rate_avg == 5}"></i>
-										
+							<i class="fa fa-star-o checkedStar"
+								th:if="${product.rate_avg <= 4}"></i> <i
+								class="fa fa-star-half-o checkedStar"
+								th:if="${product.rate_avg > 4 && product.rate_avg < 5}"></i> <i
+								class="fa fa-star checkedStar" th:if="${product.rate_avg == 5}"></i>
+
 						</div>
 
 						<div class="clearfix"></div>
-						<h6><span th:text="${product.priceString}" style="color: red;"></span></h6>
+						<h6>
+							<span th:text="${product.priceString}" style="color: red;"></span>
+						</h6>
 					</div>
 					<div class="desc_single">
 						<h5 class="sp_title">Description</h5>
-						<ul><li th:each="description : ${product.descriptions}" th:text="${description}"></li></ul>
+						<ul>
+							<li th:each="description : ${product.descriptions}"
+								th:text="${description}"></li>
+						</ul>
 					</div>
 					<div class="desc_single">
 						<h5 class="sp_title">Quantity</h5>
@@ -103,15 +119,15 @@
 					</div>
 					<div class="occasion-cart">
 						<div class="chr single-item single_page_b">
-							<form action="#" method="post">
-								<input type="hidden" name="cmd" value="_cart"> <input
-									type="hidden" name="add" value="1"> <input
-									type="hidden" name="hub_item" value="Floral Print Women's Top">
-								<input type="hidden" name="amount" value="18.00">
+							<form
+								th:action="@{/cart/add(productId=${product.id},quantity=${quantity})}">
+								<input th:name="productId" type="hidden"
+									th:value="${product.id}" /> <input th:name="quantity"
+									type="hidden" th:value="1" />
 								<button type="submit" class="hub-cart phub-cart btn">
 									<i class="fa fa-cart-plus" aria-hidden="true"></i>
 								</button>
-								<a href="#" data-toggle="modal" data-target="#myModal1"></a>
+
 							</form>
 						</div>
 					</div>
@@ -127,13 +143,15 @@
 					in</h4>
 				<div class="card-group my-5">
 					<!-- card -->
-					<div class="card product-men p-3" th:each="product,iter : ${similarProducts}">
+					<div class="card product-men p-3"
+						th:each="product,iter : ${similarProducts}">
 						<div class="men-thumb-item">
-							<img th:src="@{'/assets/images/'+ ${product.images[0]}}" alt="img" class="card-img-top">
+							<img th:src="@{'/assets/images/'+ ${product.images[0]}}"
+								alt="img" class="card-img-top">
 							<div class="men-cart-pro">
 								<div class="inner-men-cart-pro">
-									<a th:href="@{/products/{id}(id=${product.id})}" class="link-product-add-cart">Quick
-										View</a>
+									<a th:href="@{/products/{id}(id=${product.id})}"
+										class="link-product-add-cart">Quick View</a>
 								</div>
 							</div>
 						</div>
@@ -141,29 +159,41 @@
 						<div class="card-body  py-3 px-2">
 							<h5 class="card-title text-capitalize" th:text="${product.name}"
 								style="height: 60px;"></h5>
-							<p><span th:text="${product.priceString}"></span></p>
+							<p>
+								<span th:text="${product.priceString}"></span>
+							</p>
 							<div>
 								<!--First Star-->
-								<i class="fa fa-star-o checkedStar" th:if="${product.rate_avg == 0}"></i>
-								<i class="fa fa-star-half-o checkedStar" th:if="${product.rate_avg > 0 && product.rate_avg < 1}"></i>
-								<i class="fa fa-star checkedStar" th:if="${product.rate_avg >= 1}"></i>
+								<i class="fa fa-star-o checkedStar"
+									th:if="${product.rate_avg == 0}"></i> <i
+									class="fa fa-star-half-o checkedStar"
+									th:if="${product.rate_avg > 0 && product.rate_avg < 1}"></i> <i
+									class="fa fa-star checkedStar" th:if="${product.rate_avg >= 1}"></i>
 								<!--Second Star-->
-								<i class="fa fa-star-o checkedStar" th:if="${product.rate_avg <= 1}"></i>
-								<i class="fa fa-star-half-o checkedStar" th:if="${product.rate_avg > 1 && product.rate_avg < 2}"></i>
-								<i class="fa fa-star checkedStar" th:if="${product.rate_avg >= 2}"></i>
+								<i class="fa fa-star-o checkedStar"
+									th:if="${product.rate_avg <= 1}"></i> <i
+									class="fa fa-star-half-o checkedStar"
+									th:if="${product.rate_avg > 1 && product.rate_avg < 2}"></i> <i
+									class="fa fa-star checkedStar" th:if="${product.rate_avg >= 2}"></i>
 								<!--Third Star-->
-								<i class="fa fa-star-o checkedStar" th:if="${product.rate_avg <= 2}"></i>
-								<i class="fa fa-star-half-o checkedStar" th:if="${product.rate_avg > 2 && product.rate_avg < 3}"></i>
-								<i class="fa fa-star checkedStar" th:if="${product.rate_avg >= 3}"></i>
+								<i class="fa fa-star-o checkedStar"
+									th:if="${product.rate_avg <= 2}"></i> <i
+									class="fa fa-star-half-o checkedStar"
+									th:if="${product.rate_avg > 2 && product.rate_avg < 3}"></i> <i
+									class="fa fa-star checkedStar" th:if="${product.rate_avg >= 3}"></i>
 								<!--Fourth Star-->
-								<i class="fa fa-star-o checkedStar" th:if="${product.rate_avg <= 3}"></i>
-								<i class="fa fa-star-half-o checkedStar" th:if="${product.rate_avg > 3 && product.rate_avg < 4}"></i>
-								<i class="fa fa-star checkedStar" th:if="${product.rate_avg >= 4}"></i>
+								<i class="fa fa-star-o checkedStar"
+									th:if="${product.rate_avg <= 3}"></i> <i
+									class="fa fa-star-half-o checkedStar"
+									th:if="${product.rate_avg > 3 && product.rate_avg < 4}"></i> <i
+									class="fa fa-star checkedStar" th:if="${product.rate_avg >= 4}"></i>
 								<!--Fifth Star-->
-								<i class="fa fa-star-o checkedStar" th:if="${product.rate_avg <= 4}"></i>
-								<i class="fa fa-star-half-o checkedStar" th:if="${product.rate_avg > 4 && product.rate_avg < 5}"></i>
-								<i class="fa fa-star checkedStar" th:if="${product.rate_avg == 5}"></i>
-										
+								<i class="fa fa-star-o checkedStar"
+									th:if="${product.rate_avg <= 4}"></i> <i
+									class="fa fa-star-half-o checkedStar"
+									th:if="${product.rate_avg > 4 && product.rate_avg < 5}"></i> <i
+									class="fa fa-star checkedStar" th:if="${product.rate_avg == 5}"></i>
+
 							</div>
 							<!-- <div class="card-text d-flex justify-content-between">
 								<p class="text-dark font-weight-bold">$28.00</p>
@@ -172,15 +202,15 @@
 						</div>
 						<!-- card footer -->
 						<div class="card-footer d-flex justify-content-end">
-							<form action="#" method="post">
-								<input type="hidden" name="cmd" value="_cart"> <input
-									type="hidden" name="add" value="1"> <input
-									type="hidden" name="hub_item" value="Self Design Women's Tunic">
-								<input type="hidden" name="amount" value="28.00">
+							<form 
+								th:action="@{/cart/add(productId=${product.id}, quantity=${quantity})}">
+								<input th:name="productId" type="hidden"
+									th:value="${product.id}" /> <input th:name="quantity"
+									type="hidden" th:value="1" />
 								<button type="submit" class="hub-cart phub-cart btn">
 									<i class="fa fa-cart-plus" aria-hidden="true"></i>
 								</button>
-								<a href="#" data-toggle="modal" data-target="#myModal1"></a>
+
 							</form>
 						</div>
 					</div>
@@ -245,17 +275,16 @@
 									</div>
 									<!-- card footer -->
 									<div class="card-footer d-flex justify-content-end">
-										<form action="#" method="post">
-											<input type="hidden" name="cmd" value="_cart"> <input
-												type="hidden" name="add" value="1"> <input
-												type="hidden" name="hub_item"
-												value="Self Design Women's Tunic"> <input
-												type="hidden" name="amount" value="28.00">
-											<button type="submit" class="hub-cart phub-cart btn">
-												<i class="fa fa-cart-plus" aria-hidden="true"></i>
-											</button>
-											<a href="#" data-toggle="modal" data-target="#myModal1"></a>
-										</form>
+										<form	th:action="@{/cart/add(productId=${product.id}, quantity=${quantity})}">
+										<input th:name="productId" type="hidden"
+											th:value="${product.id}" />
+										<input th:name="quantity" type="hidden"
+											th:value="1" />	
+										<button type="submit" class="hub-cart phub-cart btn">
+											<i class="fa fa-cart-plus" aria-hidden="true"></i>
+										</button>
+
+									</form>
 									</div>
 								</div>
 								<!-- //card -->

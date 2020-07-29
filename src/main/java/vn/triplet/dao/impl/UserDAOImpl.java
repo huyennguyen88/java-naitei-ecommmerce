@@ -18,6 +18,7 @@ public class UserDAOImpl extends GenericDAO<Integer, User> implements UserDAO {
 	public UserDAOImpl(SessionFactory sessionFactory) {
 		setSessionFactory(sessionFactory);
 	}
+	
 
 	@SuppressWarnings("unchecked")
 	@Override

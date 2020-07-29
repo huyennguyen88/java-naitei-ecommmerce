@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 
+import vn.triplet.bean.ProductInfo;
 import vn.triplet.model.Product;
 
 public class Converter {
@@ -41,7 +42,6 @@ public class Converter {
 		product.setDescriptions(splitInformationFromStringToArray(product.getDescription()));
 		return product;
 	}
-	
 	public static List<Product> parseInformationOfProduct(List<Product> products) {
 		for(Product product : products) {
 			product.setPriceString(convertPriceFromBigDecimalToString(product.getPrice()));

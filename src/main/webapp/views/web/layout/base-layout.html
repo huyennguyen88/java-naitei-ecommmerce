@@ -13,9 +13,11 @@
 		window.scrollTo(0, 1);
 	}
 </script>
+
 <link th:href="@{/assets/web/css/bootstrap.css}" rel="stylesheet"
 	type="text/css" media="all">
-
+<link th:href="@{/assets/web/css/checkout.css}" rel="stylesheet"
+	type="text/css" media="all">
 <!-- stars css -->
 <link th:href="@{/assets/web/css/stars.css}" rel="stylesheet"
 	type="text/css" media="all">
@@ -68,7 +70,6 @@
 	</footer>
 
 	<!-- <div th:replace="views/web/layout/signup-modal :: signup-modal"></div>
-
 	<div th:replace="views/web/layout/signin-modal :: signin-modal"></div> -->
 
 	<!-- js -->
@@ -161,7 +162,7 @@
 	<script th:src="@{/assets/web/js/minicart.js}">
 		
 	</script>
-	<script>
+<!-- 	<script>
 		hub.render();
 
 		hub.cart.on('new_checkout', function(evt) {
@@ -174,7 +175,7 @@
 				}
 			}
 		});
-	</script>
+	</script> -->
 
 	
 	<!-- price range (top products) -->
@@ -259,6 +260,7 @@
 
 	<!-- Placed at the end of the document so the pages load faster -->
 	<script th:src="@{/assets/web/js/bootstrap.js}"></script>
+	
 
 </body>
 </html>
