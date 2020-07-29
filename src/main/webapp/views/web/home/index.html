@@ -6,7 +6,7 @@
 <div layout:fragment="body">
 	<div th:if="${msg != null}"
 		class="alert alert-dismissible alert-danger fade show" role="alert"
-		style="text-align:center;">
+		style="text-align: center;">
 		<button type="button" class="close" data-dismiss="alert"
 			aria-label="Close">
 			<span aria-hidden="true">&times;</span>
@@ -20,21 +20,34 @@
 				<li class="banner">
 					<div class="container">
 						<div th:if="${loginsuccess!= null}"
-							class="alert alert-success alert-dismissible alert-autocloseable-success" role="alert">
+							class="alert alert-success alert-dismissible alert-autocloseable-success"
+							role="alert">
 							<strong th:text="${loginsuccess}"></strong>
-							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							<button type="button" class="close" data-dismiss="alert"
+								aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button>
 						</div>
-						
+
 						<div th:if="${order_success!= null}"
 							class="alert alert-success alert-dismissible alert-autocloseable-success"
 							role="alert">
 							<strong th:text="${order_success}"></strong>
-							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							<button type="button" class="close" data-dismiss="alert"
+								aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button>
 						</div>
+						<div th:if="${messages_product_null!= null}"
+							class="alert alert-danger alert-dismissible alert-autocloseable-danger"
+							role="alert">
+							<strong th:text="${messages_product_null}"></strong>
+							<button type="button" class="close" data-dismiss="alert"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+
 						<h3 class="agile_btxt">
 							<span>T</span>riple <span>T</span>clothes
 						</h3>
@@ -47,7 +60,8 @@
 								<h4>
 									get up to <span class="px-2">45% </span>
 								</h4>
-								<div class="d-inline-flex flex-column banner-pos position-absolute text-center">
+								<div
+									class="d-inline-flex flex-column banner-pos position-absolute text-center">
 									<div class="bg-flex-item">
 										<span>O</span>
 									</div>
@@ -59,8 +73,8 @@
 									</div>
 								</div>
 								<p class="text-uppercase py-2">on special sale</p>
-								<a class="btn btn-primary mt-3 text-capitalize" th:href="@{/shop}" role="button">Shop
-									now</a>
+								<a class="btn btn-primary mt-3 text-capitalize"
+									th:href="@{/shop}" role="button">Shop now</a>
 							</div>
 						</div>
 					</div>
@@ -107,35 +121,41 @@
 		</h5>
 		<div class="tabs tabs-style-line pt-md-5">
 			<nav class="container">
-				<ul id="clothing-nav" class="nav nav-tabs tabs-style-line" role="tablist">
-					<li class="nav-item"><a class="nav-link active" href="#women" id="women-tab" role="tab"
-							data-toggle="tab" aria-controls="women" aria-expanded="true">Women's Fashion</a></li>
-					<li class="nav-item"><a class="nav-link" href="#men" role="tab" id="men-tab" data-toggle="tab"
-							aria-controls="men">Men's
+				<ul id="clothing-nav" class="nav nav-tabs tabs-style-line"
+					role="tablist">
+					<li class="nav-item"><a class="nav-link active" href="#women"
+						id="women-tab" role="tab" data-toggle="tab" aria-controls="women"
+						aria-expanded="true">Women's Fashion</a></li>
+					<li class="nav-item"><a class="nav-link" href="#men"
+						role="tab" id="men-tab" data-toggle="tab" aria-controls="men">Men's
 							Fashion </a></li>
 				</ul>
 			</nav>
 			<!-- Content Panel -->
 			<div id="clothing-nav-content" class="tab-content py-sm-5">
-				<div role="tabpanel" class="tab-pane fade show active" id="women" aria-labelledby="women-tab">
+				<div role="tabpanel" class="tab-pane fade show active" id="women"
+					aria-labelledby="women-tab">
 					<div id="owl-demo" class="owl-carousel text-center">
 						<div class="item" th:each="product, iter : ${productsWomen}">
 							<!-- card -->
 							<div class="card product-men p-3">
 								<div class="men-thumb-item">
-									<img th:src="@{'/assets/images/'+ ${product.images[0]}}" alt="img" class="card-img-top">
+									<img th:src="@{'/assets/images/'+ ${product.images[0]}}"
+										alt="img" class="card-img-top">
 									<div class="men-cart-pro">
 										<div class="inner-men-cart-pro">
-											<a th:href="@{/products/{id}(id=${product.id})}" class="link-product-add-cart">Quick
-												View</a>
+											<a th:href="@{/products/{id}(id=${product.id})}"
+												class="link-product-add-cart">Quick View</a>
 										</div>
 									</div>
 								</div>
 								<!-- card body -->
 								<div class="card-body  py-3 px-2" style="text-align: inherit;">
-									<h5 class="card-title text-capitalize" th:text="${product.name}"
-										style="height: 60px;"></h5>
-									<p><span th:text="${product.priceString}"></span></p>
+									<h5 class="card-title text-capitalize"
+										th:text="${product.name}" style="height: 60px;"></h5>
+									<p>
+										<span th:text="${product.priceString}"></span>
+									</p>
 									<div>
 										<!--First Star-->
 										<i class="fa fa-star-o checkedStar"
@@ -185,9 +205,8 @@
 									<form
 										th:action="@{/cart/add(productId=${product.id}, quantity=${quantity})}">
 										<input th:name="productId" type="hidden"
-											th:value="${product.id}" />
-										<input th:name="quantity" type="hidden"
-											th:value="1" />	
+											th:value="${product.id}" /> <input th:name="quantity"
+											type="hidden" th:value="1" />
 										<button type="submit" class="hub-cart phub-cart btn">
 											<i class="fa fa-cart-plus" aria-hidden="true"></i>
 										</button>
@@ -208,25 +227,29 @@
 					</div>
 				</div>
 
-				<div role="tabpanel" class="tab-pane fade" id="men" aria-labelledby="men-tab">
+				<div role="tabpanel" class="tab-pane fade" id="men"
+					aria-labelledby="men-tab">
 					<div id="owl-demo" class="owl-carousel text-center">
 						<div class="item" th:each="product, iter : ${productsMen}">
 							<!-- card -->
 							<div class="card product-men p-3">
 								<div class="men-thumb-item">
-									<img th:src="@{'/assets/images/'+ ${product.images[0]}}" alt="img" class="card-img-top">
+									<img th:src="@{'/assets/images/'+ ${product.images[0]}}"
+										alt="img" class="card-img-top">
 									<div class="men-cart-pro">
 										<div class="inner-men-cart-pro">
-											<a th:href="@{/products/{id}(id=${product.id})}" class="link-product-add-cart">Quick
-												View</a>
+											<a th:href="@{/products/{id}(id=${product.id})}"
+												class="link-product-add-cart">Quick View</a>
 										</div>
 									</div>
 								</div>
 								<!-- card body -->
 								<div class="card-body  py-3 px-2">
-									<h5 class="card-title text-capitalize" th:text="${product.name}"
-										style="height: 60px;"></h5>
-									<p><span th:text="${product.priceString}"></span></p>
+									<h5 class="card-title text-capitalize"
+										th:text="${product.name}" style="height: 60px;"></h5>
+									<p>
+										<span th:text="${product.priceString}"></span>
+									</p>
 									<div>
 										<!--First Star-->
 										<i class="fa fa-star-o checkedStar"
@@ -276,9 +299,8 @@
 									<form
 										th:action="@{/cart/add(productId=${product.id}, quantity=${quantity})}">
 										<input th:name="productId" type="hidden"
-											th:value="${product.id}" />
-										<input th:name="quantity" type="hidden"
-											th:value="1" />	
+											th:value="${product.id}" /> <input th:name="quantity"
+											type="hidden" th:value="1" />
 										<button type="submit" class="hub-cart phub-cart btn">
 											<i class="fa fa-cart-plus" aria-hidden="true"></i>
 										</button>
@@ -291,9 +313,9 @@
 
 						<div class="item">
 							<div class="product-men p-3 text-center">
-								<img th:src="@{/assets/web/images/p2.png}" class="img-responsive" alt="" /> <a
-									href="women.html" class="btn btn-lg bg-info text-white">view
-									more</a>
+								<img th:src="@{/assets/web/images/p2.png}"
+									class="img-responsive" alt="" /> <a href="women.html"
+									class="btn btn-lg bg-info text-white">view more</a>
 							</div>
 						</div>
 					</div>

@@ -43,9 +43,6 @@ public class OrderController {
 	@Autowired
 	private OrderService orderService;
 
-	@Autowired
-	private OrderItemService orderItemService;
-
 	@Value("${cart_empty}")
 	private String cart_empty;
 	

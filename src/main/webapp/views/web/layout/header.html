@@ -49,11 +49,10 @@
 			<!-- search form -->
 			<div class="nav-icon d-flex">
 				<!-- sigin and sign up -->
-				<span th:if="${session.currentUser}==null" class="rd-nav-item"><a
+				<a th:if="${session.currentUser}==null"
 					class="text-dark login_btn align-self-center mx-3"
 					th:href="@{/login}"> <i class="far fa-user"></i>
-				</a></span>
-
+				</a>
 				<div th:if="${session.currentUser}!=null">
 					<ul class="nav nav-tabs">
 						<li class="nav-item dropdown ml-auto"><a href="#"
