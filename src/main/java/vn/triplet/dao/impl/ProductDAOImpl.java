@@ -4,15 +4,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
-
-import org.apache.log4j.Logger;
 import org.hibernate.SessionFactory;
-
-import com.mysql.cj.Query;
 
 import vn.triplet.dao.GenericDAO;
 import vn.triplet.dao.ProductDAO;
@@ -21,8 +13,6 @@ import vn.triplet.model.Product;
 
 public class ProductDAOImpl extends GenericDAO<Integer, Product> implements ProductDAO{
 
-	private static final Logger logger = Logger.getLogger(ProductDAOImpl.class);
-	
 	public ProductDAOImpl() {
 		super(Product.class);
 	}

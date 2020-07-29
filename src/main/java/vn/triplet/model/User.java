@@ -54,7 +54,7 @@ public class User {
 	@Enumerated(EnumType.STRING)
 	private Role role;
 
-	@Column(name = "create_time")
+	@Column(name = "create_time", updatable = false)
 	@Temporal(TemporalType.TIMESTAMP)
 	@CreationTimestamp
 	private Date create_time;
