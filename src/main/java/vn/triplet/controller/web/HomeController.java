@@ -10,16 +10,29 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import vn.triplet.helper.Constans;
+import vn.triplet.helper.Converter;
+import vn.triplet.model.Product;
+import vn.triplet.service.ProductService;
 import vn.triplet.bean.UserInfo;
 import vn.triplet.service.UserService;
 
-@Controller(value = "homeControllerOfWeb")
+@Controller(value = "home")
 public class HomeController {
+
 	@Autowired
-	public UserService userService;
+	private ProductService productService;
 
 	@RequestMapping("/")
-	public String index() {
+	public String index(Model model) {
+		List<Product> productsWomen = productService.loadHotTrendProduct(Constans.WOMAN_PRODUCTS);
+		List<Product> productsMen = productService.loadHotTrendProduct(Constans.MAN_PRODUCTS);
+
+		model.addAttribute("productsWomen", productsWomen);
+		model.addAttribute("productsMen", productsMen);
+		model.addAttribute("priceStringOfWoMenProducts", Converter.convertPriceFromBigDecimalToString(productsWomen));
+		model.addAttribute("priceStringOfMenProducts", Converter.convertPriceFromBigDecimalToString(productsMen));
+		
 		return "views/web/home/index";
 	}
 	
