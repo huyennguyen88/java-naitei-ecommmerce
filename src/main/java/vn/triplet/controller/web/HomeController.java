@@ -10,7 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import vn.triplet.helper.Constans;
+import vn.triplet.helper.Constant;
 import vn.triplet.helper.Converter;
 import vn.triplet.model.Product;
 import vn.triplet.service.ProductService;
@@ -25,15 +25,11 @@ public class HomeController {
 
 	@RequestMapping("/")
 	public String index(Model model) {
-		List<Product> womenProducts = productService.loadHotTrendProduct(Constans.WOMAN_PRODUCTS);
-		List<Product> menProducts = productService.loadHotTrendProduct(Constans.MAN_PRODUCTS);
-
+		List<Product> womenProducts = productService.loadHotTrendProduct(Constant.WOMAN_PRODUCTS);
+		List<Product> menProducts = productService.loadHotTrendProduct(Constant.MAN_PRODUCTS);
+		
 		model.addAttribute("productsWomen", womenProducts);
 		model.addAttribute("productsMen", menProducts);
-		model.addAttribute("priceStringOfWoMenProducts", Converter.convertPriceFromBigDecimalToString(womenProducts));
-		model.addAttribute("priceStringOfMenProducts", Converter.convertPriceFromBigDecimalToString(menProducts));
-		model.addAttribute("mainImageWoMenProducts", Converter.getMainImagesFromListImages(womenProducts));
-		model.addAttribute("mainImageMenProducts", Converter.getMainImagesFromListImages(menProducts));
 		
 		return "views/web/home/index";
 	}

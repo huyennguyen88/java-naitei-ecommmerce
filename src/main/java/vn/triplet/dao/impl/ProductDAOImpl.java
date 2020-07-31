@@ -4,11 +4,19 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+
 import org.apache.log4j.Logger;
 import org.hibernate.SessionFactory;
 
+import com.mysql.cj.Query;
+
 import vn.triplet.dao.GenericDAO;
 import vn.triplet.dao.ProductDAO;
+import vn.triplet.helper.Constant;
 import vn.triplet.model.Product;
 
 public class ProductDAOImpl extends GenericDAO<Integer, Product> implements ProductDAO{
@@ -60,6 +68,25 @@ public class ProductDAOImpl extends GenericDAO<Integer, Product> implements Prod
 			products.add(p);
 		}
 		return products;
-	}	
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Product> loadProductWithCategoryID(int categoryId, int productId) {
+		if(productId != Constant.NONE_PRODUCT_ID) {
+			return getSession().createQuery("FROM Product WHERE id!=:productId AND category_id=:categoryId ORDER BY rate_avg DESC")
+					.setParameter("productId", productId)
+					.setParameter("categoryId", categoryId)
+					.setMaxResults(4)
+					.getResultList();
+		}
+		else {
+			return getSession().createQuery("FROM Product WHERE image LIKE '%-:categoryID-%' ORDER BY rate_avg DESC")
+					.setParameter("categoryId", categoryId)
+					.getResultList();
+		}
+	}
+	
+	
 	
 }
