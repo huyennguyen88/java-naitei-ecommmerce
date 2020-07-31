@@ -25,13 +25,15 @@ public class HomeController {
 
 	@RequestMapping("/")
 	public String index(Model model) {
-		List<Product> productsWomen = productService.loadHotTrendProduct(Constans.WOMAN_PRODUCTS);
-		List<Product> productsMen = productService.loadHotTrendProduct(Constans.MAN_PRODUCTS);
+		List<Product> womenProducts = productService.loadHotTrendProduct(Constans.WOMAN_PRODUCTS);
+		List<Product> menProducts = productService.loadHotTrendProduct(Constans.MAN_PRODUCTS);
 
-		model.addAttribute("productsWomen", productsWomen);
-		model.addAttribute("productsMen", productsMen);
-		model.addAttribute("priceStringOfWoMenProducts", Converter.convertPriceFromBigDecimalToString(productsWomen));
-		model.addAttribute("priceStringOfMenProducts", Converter.convertPriceFromBigDecimalToString(productsMen));
+		model.addAttribute("productsWomen", womenProducts);
+		model.addAttribute("productsMen", menProducts);
+		model.addAttribute("priceStringOfWoMenProducts", Converter.convertPriceFromBigDecimalToString(womenProducts));
+		model.addAttribute("priceStringOfMenProducts", Converter.convertPriceFromBigDecimalToString(menProducts));
+		model.addAttribute("mainImageWoMenProducts", Converter.getMainImagesFromListImages(womenProducts));
+		model.addAttribute("mainImageMenProducts", Converter.getMainImagesFromListImages(menProducts));
 		
 		return "views/web/home/index";
 	}

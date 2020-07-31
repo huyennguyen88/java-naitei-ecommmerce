@@ -36,4 +36,20 @@ public class Converter {
 		return price;
 	}
 	
+	public static String[] convertImagesFromStringToArray(String imagesString) {
+		String[] imagesArray = imagesString.split("/");
+		return imagesArray;
+	}
+	
+	public static String[] getMainImagesFromListImages(List<Product> products) {
+		String[] mainImages = new String[products.size()];
+		int i = 0;
+		
+		for(Product product : products) {
+			mainImages[i ++] = Converter.convertImagesFromStringToArray(product.getImage())[0];
+		}
+		
+		
+		return mainImages;
+	}
 }
