@@ -4,6 +4,15 @@
 	layout:decorate="views/web/layout/base-layout">
 
 <div layout:fragment="body">
+	<div th:if="${msg != null}"
+		class="alert alert-dismissible alert-danger fade show" role="alert"
+		style="text-align:center;">
+		<button type="button" class="close" data-dismiss="alert"
+			aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>
+		<strong><span th:text="${msg}"></span></strong> Sorry about that !!!
+	</div>
 	<!-- banner -->
 	<div class="banner-text">
 		<div class="callbacks_container">
@@ -16,7 +25,7 @@
 							<strong th:text="${loginsuccess}"></strong>
 						</div>
 						<h3 class="agile_btxt">
-							<span>T</span>ipple <span>T</span>clothes
+							<span>T</span>riple <span>T</span>clothes
 						</h3>
 						<h4 class="w3_bbot">shop exclusive clothing</h4>
 						<div class="slider-info mt-sm-5">
@@ -107,19 +116,19 @@
 							<!-- card -->
 							<div class="card product-men p-3">
 								<div class="men-thumb-item">
-									<img th:src="@{'/assets/images/'+ ${mainImageWoMenProducts[iter.count - 1]}}" alt="img" class="card-img-top">
+									<img th:src="@{'/assets/images/'+ ${product.images[0]}}" alt="img" class="card-img-top">
 									<div class="men-cart-pro">
 										<div class="inner-men-cart-pro">
-											<a th:href="@{/single}" class="link-product-add-cart">Quick
+											<a th:href="@{/products/{id}(id=${product.id})}" class="link-product-add-cart">Quick
 												View</a>
 										</div>
 									</div>
 								</div>
 								<!-- card body -->
-								<div class="card-body  py-3 px-2">
+								<div class="card-body  py-3 px-2" style="text-align: inherit;">
 									<h5 class="card-title text-capitalize" th:text="${product.name}"
 										style="height: 60px;"></h5>
-									<p><span th:text="${priceStringOfWoMenProducts[iter.count - 1]}"></span><span> ₫</span></p>
+									<p><span th:text="${product.priceString}"></span></p>
 									<div>
 										<!--First Star-->
 										<i class="fa fa-star-o checkedStar" th:if="${product.rate_avg == 0}"></i>
@@ -184,10 +193,10 @@
 							<!-- card -->
 							<div class="card product-men p-3">
 								<div class="men-thumb-item">
-									<img th:src="@{'/assets/images/'+ ${mainImageMenProducts[iter.count - 1]}}" alt="img" class="card-img-top">
+									<img th:src="@{'/assets/images/'+ ${product.images[0]}}" alt="img" class="card-img-top">
 									<div class="men-cart-pro">
 										<div class="inner-men-cart-pro">
-											<a th:href="@{/single}" class="link-product-add-cart">Quick
+											<a th:href="@{/products/{id}(id=${product.id})}" class="link-product-add-cart">Quick
 												View</a>
 										</div>
 									</div>
@@ -196,7 +205,7 @@
 								<div class="card-body  py-3 px-2">
 									<h5 class="card-title text-capitalize" th:text="${product.name}"
 										style="height: 60px;"></h5>
-									<p><span th:text="${priceStringOfMenProducts[iter.count - 1]}"></span><span> ₫</span></p>
+									<p><span th:text="${product.priceString}"></span></p>
 									<div>
 										<!--First Star-->
 										<i class="fa fa-star-o checkedStar" th:if="${product.rate_avg == 0}"></i>

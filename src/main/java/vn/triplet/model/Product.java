@@ -16,6 +16,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.Type;
@@ -72,7 +73,16 @@ public class Product {
 
 	@OneToMany(mappedBy = "product")
 	private List<Rate> rates;
-
+	
+	@Transient
+	private String priceString;
+	
+	@Transient
+	private List<String> images;
+	
+	@Transient
+	private List<String> descriptions;
+	
 	public int getId() {
 		return id;
 	}
@@ -175,6 +185,30 @@ public class Product {
 
 	public void setRates(List<Rate> rates) {
 		this.rates = rates;
+	}
+	
+	public String getPriceString() {
+		return priceString;
+	}
+
+	public void setPriceString(String priceString) {
+		this.priceString = priceString;
+	}
+
+	public List<String> getImages() {
+		return images;
+	}
+
+	public void setImages(List<String> images) {
+		this.images = images;
+	}
+
+	public List<String> getDescriptions() {
+		return descriptions;
+	}
+
+	public void setDescriptions(List<String> descriptions) {
+		this.descriptions = descriptions;
 	}
 
 	@Override

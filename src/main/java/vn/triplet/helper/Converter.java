@@ -1,11 +1,16 @@
 package vn.triplet.helper;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.List;
 
 import vn.triplet.model.Product;
 
 public class Converter {
+	
+	/*
+	 * FOR PRODUCT
+	 */
 	
 	public static String convertPriceFromBigDecimalToString(BigDecimal d) {
 		String result = "";
@@ -22,34 +27,31 @@ public class Converter {
 				result += ".";
 		}
 		
+		return result + " ₫";
+	}
+	
+	public static List<String> splitInformationFromStringToArray(String string) {
+		List<String> result = Arrays.asList(string.split("/"));
 		return result;
 	}
 	
-	public static String[] convertPriceFromBigDecimalToString(List<Product> products) {
-		String[] price = new String[products.size()];
-		int i = 0;
-		
-		for(Product product : products) {
-			price[i ++] = Converter.convertPriceFromBigDecimalToString(product.getPrice());
-		}
-		
-		return price;
+	public static Product parseInformationOfProduct(Product product) {
+		product.setPriceString(convertPriceFromBigDecimalToString(product.getPrice()));
+		product.setImages(splitInformationFromStringToArray(product.getImage()));
+		product.setDescriptions(splitInformationFromStringToArray(product.getDescription()));
+		return product;
 	}
 	
-	public static String[] convertImagesFromStringToArray(String imagesString) {
-		String[] imagesArray = imagesString.split("/");
-		return imagesArray;
+	public static List<Product> parseInformationOfProduct(List<Product> products) {
+		for(Product product : products) {
+			product.setPriceString(convertPriceFromBigDecimalToString(product.getPrice()));
+			product.setImages(splitInformationFromStringToArray(product.getImage()));
+			product.setDescriptions(splitInformationFromStringToArray(product.getDescription()));
+		}
+		return products;
 	}
 	
-	public static String[] getMainImagesFromListImages(List<Product> products) {
-		String[] mainImages = new String[products.size()];
-		int i = 0;
-		
-		for(Product product : products) {
-			mainImages[i ++] = Converter.convertImagesFromStringToArray(product.getImage())[0];
-		}
-		
-		
-		return mainImages;
-	}
+	/*
+	 * 
+	 */
 }
