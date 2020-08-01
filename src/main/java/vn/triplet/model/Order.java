@@ -61,7 +61,7 @@ public class Order {
 	@UpdateTimestamp
 	private Date update_time;
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "order")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "order")
 	private List<OrderItem> orderItems;
 
 	@Column(name = "total", nullable = false)

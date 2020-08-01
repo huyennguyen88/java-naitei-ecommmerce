@@ -4,9 +4,7 @@ import org.apache.log4j.Logger;
 import org.hibernate.SessionFactory;
 
 import vn.triplet.dao.GenericDAO;
-import vn.triplet.dao.OrderDAO;
 import vn.triplet.dao.OrderItemDAO;
-import vn.triplet.model.Order;
 import vn.triplet.model.OrderItem;
 
 public class OrderItemDAOImpl extends GenericDAO<Integer, OrderItem> implements OrderItemDAO {
