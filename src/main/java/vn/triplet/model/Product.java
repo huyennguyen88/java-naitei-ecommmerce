@@ -217,8 +217,4 @@ public class Product {
 				+ price + "]";
 	}
 
-	
-	
-
-
 }
