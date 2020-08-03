@@ -2,15 +2,12 @@ package vn.triplet.controller.web;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,27 +18,29 @@ import vn.triplet.bean.UserInfo;
 import vn.triplet.model.User;
 import vn.triplet.service.UserService;
 import vn.triplet.validate.UserValidation;
+
 @PropertySource("classpath:messages.properties")
 @Controller(value = "users")
-public class UserController{
-	
+public class UserController {
+
 	@Autowired
 	private UserService userService;
-	
+
 	@Value("${messages.login}")
 	private String msg_login;
-	
+
 	@Value("${messages.error_mail}")
 	private String msg_error_mail;
-	
+
 	@Value("${messages.register}")
 	private String msg_register;
-	
+
 	@Value("${Login_error}")
 	private String Login_error;
-	
+
 	private static final int ADMIN = 0;
 	private static final int USER = 1;
+
 	@RequestMapping("users/{id}")
 	public String redering(@PathVariable("id") int id, Model model) {
 		return "views/web/profile";

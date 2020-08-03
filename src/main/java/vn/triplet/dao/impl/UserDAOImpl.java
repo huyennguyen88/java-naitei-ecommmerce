@@ -1,6 +1,5 @@
 package vn.triplet.dao.impl;
 
-import java.io.Serializable;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -11,18 +10,13 @@ import vn.triplet.model.User;
 
 public class UserDAOImpl extends GenericDAO<Integer, User> implements UserDAO {
 	Logger logger = Logger.getLogger(UserDAOImpl.class);
-	
+
 	public UserDAOImpl() {
 		super(User.class);
 	}
 
 	public UserDAOImpl(SessionFactory sessionFactory) {
 		setSessionFactory(sessionFactory);
-	}
-	@Override
-	public User findById(Serializable key) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -33,17 +27,20 @@ public class UserDAOImpl extends GenericDAO<Integer, User> implements UserDAO {
 
 	@Override
 	public User findByEmail(String email) {
-		return (User)getSession().createQuery("from User where email=: email")
-				.setParameter("email", email).uniqueResult();
+		return (User) getSession().createQuery("from User where email=: email").setParameter("email", email)
+				.uniqueResult();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public boolean checkEmailExist(String email) {
-		User user =(User)getSession().createQuery("from User where email=: email")
-				.setParameter("email", email).uniqueResult();
-		if(user!=null) return true;
+		User user = (User) getSession().createQuery("from User where email=: email").setParameter("email", email)
+				.uniqueResult();
+		if (user != null)
+			return true;
 		return false;
 	}
 
-	
+
+
 }

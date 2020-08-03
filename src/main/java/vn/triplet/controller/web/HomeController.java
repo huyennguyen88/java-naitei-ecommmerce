@@ -15,7 +15,6 @@ import vn.triplet.helper.Converter;
 import vn.triplet.model.Product;
 import vn.triplet.service.ProductService;
 import vn.triplet.bean.UserInfo;
-import vn.triplet.service.UserService;
 
 @Controller(value = "home")
 public class HomeController {
