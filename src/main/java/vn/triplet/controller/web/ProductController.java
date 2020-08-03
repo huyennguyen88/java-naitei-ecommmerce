@@ -9,6 +9,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -24,6 +25,8 @@ import com.mysql.cj.protocol.Message;
 
 import vn.triplet.bean.RateInfo;
 import vn.triplet.helper.Converter;
+import vn.triplet.helper.Getter;
+import vn.triplet.model.Category;
 import vn.triplet.model.Product;
 import vn.triplet.model.Rate;
 import vn.triplet.service.ProductService;
@@ -45,8 +48,12 @@ public class ProductController {
 
 	@SuppressWarnings("unchecked")
 	@GetMapping(value = "{id}")
-	public String showProductDetails(@PathVariable int id, RedirectAttributes redirectAttributes,
-			HttpServletRequest request, HttpSession session, Model model) {
+	public String showProductDetails(
+			@PathVariable int id, 
+			RedirectAttributes redirectAttributes,
+			HttpServletRequest request, 
+			HttpSession session, 
+			Model model) {
 		logger.info("show a product");
 		Product product = productService.findById(id);
 		if (product == null) {
@@ -62,17 +69,22 @@ public class ProductController {
 		List<Product> recentlyViewedProducts = productService
 				.loadProductWithListProductId((List<Integer>) recentlyViewedProductIds);
 		List<Rate> ratings = rateService.loadRatings(id);
-
+		List<ImmutablePair<Integer, String>> recentlyPathSelected = Getter.getRecentlyPathSelected(product);
+		
 		model.addAttribute("product", product);
 		model.addAttribute("similarProducts", similarProducts);
 		model.addAttribute("recentlyViewedProducts", recentlyViewedProducts);
+		model.addAttribute("recentlyPathSelected", recentlyPathSelected);
+		for(ImmutablePair<Integer, String> r : recentlyPathSelected)
+			System.out.println(r.getValue() + "-");
 		if (ratings.size() > 0)
 			model.addAttribute("ratings", ratings);
 		model.addAttribute("newRate", new RateInfo());
+		
 		LinkedList<Integer> nextRecentlyViewedProductIds = getNextRecentlyViewedProductIds(recentlyViewedProductIds,
 				product.getId());
 		session.setAttribute("recentlyViewedProductIds", nextRecentlyViewedProductIds);
-		return "views/web/single-product/product";
+		return "views/web/product/product";
 	}
 
 	@SuppressWarnings({ "unused", "unchecked" })
@@ -101,5 +113,5 @@ public class ProductController {
 
 		return nextRecentlyViewedProductIds;
 	}
-
+		
 }

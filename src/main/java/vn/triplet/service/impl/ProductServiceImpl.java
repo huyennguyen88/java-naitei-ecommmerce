@@ -3,6 +3,7 @@ package vn.triplet.service.impl;
 import java.io.Serializable;
 import java.util.List;
 
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -85,6 +86,21 @@ public class ProductServiceImpl extends BaseServiceImpl implements ProductServic
 			return null;
 		}
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Object> loadProductWithFilter(int categoryId, String productName, Integer fromprice,
+			Integer toprice, Integer rating, Integer page) {
+		try{
+			List<Object> objects = productDAO.loadProductWithFilter(categoryId, productName, fromprice, toprice, rating, page);
+			objects.set(0, Converter.parseInformationOfProduct((List<Product>) objects.get(0))); 
+			return objects;
+		} catch(Exception e) {
+			logger.error(e);
+			return null;
+		}
+	}
+
 
 
 	

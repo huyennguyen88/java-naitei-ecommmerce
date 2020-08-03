@@ -25,6 +25,14 @@
 			</bean>
 		</property>
 	</bean>
+	
+	<bean id="categoryService" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="vn.triplet.service.impl.CategoryServiceImpl">
+				<property name="categoryDAO" ref="CategoryDAO" />
+			</bean>
+		</property>
+	</bean>
 
 	<bean id="orderService" parent="baseTransactionProxy">
 		<property name="target">

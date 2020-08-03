@@ -11,6 +11,21 @@
 	</div>
 	<!-- //inner banner -->
 
+	<nav aria-label="breadcrumb" th:with="len= ${recentlyPathSelected != null ? #arrays?.length(recentlyPathSelected) - 1 : 0}">
+		<ol class="breadcrumb" style="padding-left: 25px;">
+			<li class="breadcrumb-item"><a th:href="@{/}"><span style="padding: 0px 25px;">Home</span></a></li>
+			<li class="breadcrumb-item"><a th:href="@{/}"><span style="padding: 0px 25px;">Thời trang</span></a></li>
+			<li class="breadcrumb-item" th:if="${recentlyPathSelected != null}" 
+			th:each="element, iter : ${recentlyPathSelected}">
+				<a th:if="${len != iter.count -1}" href="" th:href="@{/categories/{id}/products(id=${element.getKey()})}"><span style="padding: 0px 25px;" th:text="${element.getValue()}"></span>
+				</a>
+				<a th:if="${len == iter.count -1}" href="" th:href="@{/products/{id}(id=${element.getKey()})}"><span style="padding: 0px 25px;" th:text="${element.getValue()}"></span>
+				</a></li>
+			<!-- <li class="breadcrumb-item"><a href="#"><span style="padding: 0px 25px;">Home</span></a></li>
+			<li class="breadcrumb-item"><a href="#"><span style="padding: 0px 25px;">Home</span></a></li> -->
+		</ol>
+	</nav>
+
 	<!-- Single -->
 	<div class="innerf-pages section py-5">
 		<div class="container">

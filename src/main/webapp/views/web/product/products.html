@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="views/web/layout/base-layout">
+
+<div layout:fragment="body" style="padding-top: 2px;" >
+
+	<!-- inner banner -->
+	<div class="ibanner_w3 pt-sm-5 pt-3">
+		<h4
+			class="head_agileinfo text-center text-capitalize text-center pt-5">
+			<span>T</span>ipple<span>T</span> clothes
+		</h4>
+	</div>
+	<!-- Shop -->
+	
+	
+	<nav aria-label="breadcrumb">
+		<ol class="breadcrumb" style="padding-left: 25px;">
+			<li class="breadcrumb-item"><a th:href="@{/}"><span style="padding: 0px 25px;">Home</span></a></li>
+			<li class="breadcrumb-item"><a th:href="@{/}"><span style="padding: 0px 25px;">Thời trang</span></a></li>
+			<li class="breadcrumb-item" 
+				th:if="${recentlyPathSelected != null}" 
+				th:each="element : ${recentlyPathSelected}">
+				<a href="" th:href="@{/categories/{id}/products(id=${element.getKey()})}">
+					<span style="padding: 0px 25px;" th:text="${element.getValue()}"
+					></span>
+				</a>
+			</li>
+			<!-- <li class="breadcrumb-item"><a href="#"><span style="padding: 0px 25px;">Home</span></a></li>
+			<li class="breadcrumb-item"><a href="#"><span style="padding: 0px 25px;">Home</span></a></li> -->
+		</ol>
+	</nav>
+	
+	<div th:if="${msg != null}"
+		th:class="${'alert alert-dismissible alert-' + css + 'fade show'}" role="alert"
+		style="text-align: center;">
+		<button type="button" class="close" data-dismiss="alert"
+			aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>
+		<strong><span th:text="${msg}"></span></strong> Sorry about that !!! HAHAHA 
+	</div>
+
+	<div class="innerf-pages section">
+		<div class="fh-container mx-auto">
+			<div class="row my-lg-5 mb-5">
+			
+			    <!-- Choose left -->
+				<div th:replace="views/web/layout/choose-left :: choose-left"></div>
+				
+				<!-- grid right -->
+				<div class="col-lg-9 mt-lg-0 mt-5 right-product-grid">
+
+					<!-- card group  -->
+					<!-- for(int i = 0; i < 81 ; i+=20){ 
+					    //Should loop through 5 times! 
+					} --> 
+					<div th:if="${products != null}" class="card-group" th:each="i : ${#numbers.sequence(0, (#arrays?.length(products)-1)/4)}">
+						<!-- row1-->
+						<!-- card -->
+						<div th:each="j : ${#numbers.sequence(0, 3)}" 
+							th:if="${#arrays.length(products) > (i * 4 + j)}" class="col-lg-3 col-sm-6 p-0">
+							<div class="card product-men p-3">
+								<div class="men-thumb-item">
+									<img th:src="@{'/assets/images/'+ ${products[i * 4 + j].images[0]}}" alt="img"
+										class="card-img-top">
+									<div class="men-cart-pro">
+										<div class="inner-men-cart-pro">
+											<a th:href="@{/products/{id}(id=${products[i * 4 + j].id})}" 
+												class="link-product-add-cart">Quick
+												View</a>
+										</div>
+									</div>
+								</div>
+								<!-- card body -->
+								<div class="card-body  py-3 px-2">
+									<h5 class="card-title text-capitalize" th:text="${products[i * 4 + j].name}"
+										style="height: 60px;"></h5>
+									<p><span th:text="${products[i * 4 + j].priceString}"></span></p>
+									<div>
+										<!--First Star-->
+										<i class="fa fa-star-o checkedStar" th:if="${products[i * 4 + j].rate_avg == 0}"></i>
+										<i class="fa fa-star-half-o checkedStar"
+											th:if="${products[i * 4 + j].rate_avg > 0 && products[i * 4 + j].rate_avg < 1}"></i>
+										<i class="fa fa-star checkedStar" th:if="${products[i * 4 + j].rate_avg >= 1}"></i>
+										<!--Second Star-->
+										<i class="fa fa-star-o checkedStar" th:if="${products[i * 4 + j].rate_avg <= 1}"></i>
+										<i class="fa fa-star-half-o checkedStar"
+											th:if="${products[i * 4 + j].rate_avg > 1 && products[i * 4 + j].rate_avg < 2}"></i>
+										<i class="fa fa-star checkedStar" th:if="${products[i * 4 + j].rate_avg >= 2}"></i>
+										<!--Third Star-->
+										<i class="fa fa-star-o checkedStar" th:if="${products[i * 4 + j].rate_avg <= 2}"></i>
+										<i class="fa fa-star-half-o checkedStar"
+											th:if="${products[i * 4 + j].rate_avg > 2 && products[i * 4 + j].rate_avg < 3}"></i>
+										<i class="fa fa-star checkedStar" th:if="${products[i * 4 + j].rate_avg >= 3}"></i>
+										<!--Fourth Star-->
+										<i class="fa fa-star-o checkedStar" th:if="${products[i * 4 + j].rate_avg <= 3}"></i>
+										<i class="fa fa-star-half-o checkedStar"
+											th:if="${products[i * 4 + j].rate_avg > 3 && products[i * 4 + j].rate_avg < 4}"></i>
+										<i class="fa fa-star checkedStar" th:if="${products[i * 4 + j].rate_avg >= 4}"></i>
+										<!--Sixth Star-->
+										<i class="fa fa-star-o checkedStar" th:if="${products[i * 4 + j].rate_avg <= 4}"></i>
+										<i class="fa fa-star-half-o checkedStar"
+											th:if="${products[i * 4 + j].rate_avg > 4 && products[i * 4 + j].rate_avg < 5}"></i>
+										<i class="fa fa-star checkedStar" th:if="${products[i * 4 + j].rate_avg == 5}"></i>
+
+									</div>
+								</div>
+								<!-- <!-- card footer -->
+								<!-- <div class="card-footer d-flex justify-content-end">
+									<form action="#" method="post">
+										<input type="hidden" name="cmd" value="_cart"> <input
+											type="hidden" name="add" value="1"> <input
+											type="hidden" name="hub_item"
+											value="Men's Hooded Blue T-Shirt"> <input
+											type="hidden" name="amount" value="19.99">
+										<button type="submit" class="hub-cart phub-cart btn">
+											<i class="fa fa-cart-plus" aria-hidden="true"></i>
+										</button>
+										<a href="#" data-toggle="modal" data-target="#myModal1"></a>
+									</form>
+								</div> -->
+							</div>
+						</div>
+					</div>
+
+					<div class="container" style="padding-top:20px;" 
+						th:if="${(sumProductOfCategory-1)/16 > 0}"
+						th:with="urlBuilder=${T(org.springframework.web.servlet.support.ServletUriComponentsBuilder).fromCurrentRequest()}">
+						<ul class="pagination" style="float:right;">
+							<li class="page-item" th:if="${#request.getParameter('page') != null and T(Integer).parseInt(#request.getParameter('page')) != 1}"
+								><a class="page-link" 
+									th:with="y=${T(Integer).parseInt(#request.getParameter('page')) - 1}"
+									th:href="${#strings.replace(#uris.unescapeQueryParam(urlBuilder.replaceQueryParam('page',#strings?.toString(y)).toUriString()).replace('%20','+'),' ','+')}"
+									>Trước</a></li>
+							<li class="page-item" th:classappend="${#request.getParameter('page') != null ? (#request.getParameter('page') == #strings?.toString(i) ? 
+																	'active' :''):((i == 1)? 'active' : '')}"  
+								th:each="i : ${#numbers.sequence(1, (sumProductOfCategory-1)/16 + 1)}">
+								<a class="page-link" th:text="${i}"
+									th:href="${#strings.replace(#uris.unescapeQueryParam(urlBuilder.replaceQueryParam('page',#strings?.toString(i)).toUriString()).replace('%20','+'),' ','+')}"></a>
+							</li>
+							<li class="page-item" th:if="${#request.getParameter('page') == null or T(Integer).parseInt(#request.getParameter('page')) != ((sumProductOfCategory-1)/16 + 1)}"
+								><a class="page-link" 
+									th:with="yy=${#request.getParameter('page') == null ? 2 : T(Integer).parseInt(#request.getParameter('page')) + 1}"
+									th:href="${#strings.replace(#uris.unescapeQueryParam(urlBuilder.replaceQueryParam('page',#strings?.toString(yy)).toUriString()).replace('%20','+'),' ','+')}"
+								>Sau</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<p></p>
+	
+	<section th:if="${recentlyViewedProducts} != null" class="tabs_pro py-md-5 pt-sm-3 pb-5">
+		<div class="tabs tabs-style-line pt-md-1">
+			<div id="clothing-nav-content" class="tab-content py-sm-1">
+				<div class="container">
+					<div role="tabpanel" class="tab-pane fade show active" id="women"
+						aria-labelledby="women-tab">
+						<h4 class="rad-txt text-capitalize">recently viewed products</h4>
+						<div id="owl-demo" class="owl-carousel text-center card-group my-5">
+							<div class="item" th:each="product, iter : ${recentlyViewedProducts}">
+								<!-- card -->
+								<div class="card product-men p-3">
+									<div class="men-thumb-item">
+										<img th:src="@{'/assets/images/'+ ${product.images[0]}}" alt="img" class="card-img-top">
+										<div class="men-cart-pro">
+											<div class="inner-men-cart-pro">
+												<a th:href="@{/products/{id}(id=${product.id})}" class="link-product-add-cart">Quick
+													View</a>
+											</div>
+										</div>
+									</div>
+									<!-- card body -->
+									<div class="card-body  py-3 px-2" style="text-align: inherit;">
+										<h5 class="card-title text-capitalize" th:text="${product.name}"
+											style="height: 60px;"></h5>
+										<p><span th:text="${product.priceString}"></span></p>
+										<div>
+											<!--First Star-->
+											<i class="fa fa-star-o checkedStar" th:if="${product.rate_avg == 0}"></i>
+											<i class="fa fa-star-half-o checkedStar" th:if="${product.rate_avg > 0 && product.rate_avg < 1}"></i>
+											<i class="fa fa-star checkedStar" th:if="${product.rate_avg >= 1}"></i>
+											<!--Second Star-->
+											<i class="fa fa-star-o checkedStar" th:if="${product.rate_avg <= 1}"></i>
+											<i class="fa fa-star-half-o checkedStar" th:if="${product.rate_avg > 1 && product.rate_avg < 2}"></i>
+											<i class="fa fa-star checkedStar" th:if="${product.rate_avg >= 2}"></i>
+											<!--Third Star-->
+											<i class="fa fa-star-o checkedStar" th:if="${product.rate_avg <= 2}"></i>
+											<i class="fa fa-star-half-o checkedStar" th:if="${product.rate_avg > 2 && product.rate_avg < 3}"></i>
+											<i class="fa fa-star checkedStar" th:if="${product.rate_avg >= 3}"></i>
+											<!--Fourth Star-->
+											<i class="fa fa-star-o checkedStar" th:if="${product.rate_avg <= 3}"></i>
+											<i class="fa fa-star-half-o checkedStar" th:if="${product.rate_avg > 3 && product.rate_avg < 4}"></i>
+											<i class="fa fa-star checkedStar" th:if="${product.rate_avg >= 4}"></i>
+											<!--Sixth Star-->
+											<i class="fa fa-star-o checkedStar" th:if="${product.rate_avg <= 4}"></i>
+											<i class="fa fa-star-half-o checkedStar" th:if="${product.rate_avg > 4 && product.rate_avg < 5}"></i>
+											<i class="fa fa-star checkedStar" th:if="${product.rate_avg == 5}"></i>
+											
+										</div>
+										<!-- <div class="card-text d-flex justify-content-between">
+											khuyến mại
+											<p class="text-dark font-weight-bold"></p>
+											<p th:text="${product.price}"> ₫</p>
+										</div> -->
+									</div>
+									<!-- card footer -->
+									<div class="card-footer d-flex justify-content-end">
+										<form	th:action="@{/cart/add(productId=${product.id}, quantity=${quantity})}">
+										<input th:name="productId" type="hidden"
+											th:value="${product.id}" />
+										<input th:name="quantity" type="hidden"
+											th:value="1" />	
+										<button type="submit" class="hub-cart phub-cart btn">
+											<i class="fa fa-cart-plus" aria-hidden="true"></i>
+										</button>
+									</form>
+									</div>
+								</div>
+								<!-- //card -->
+							</div>
+							
+							<div class="item">
+								<div class="product-men p-3 text-center">
+									<img th:src="@{/assets/web/images/p2.png}" class="img-responsive" alt="" /> <a
+										href="women.html" class="btn btn-lg bg-info text-white">view
+										more</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--// Shop -->
+</div>

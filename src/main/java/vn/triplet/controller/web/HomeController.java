@@ -20,7 +20,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import vn.triplet.helper.Constant;
 import vn.triplet.helper.Converter;
+import vn.triplet.model.Category;
 import vn.triplet.model.Product;
+import vn.triplet.service.CategoryService;
 import vn.triplet.model.User;
 import vn.triplet.service.ProductService;
 import vn.triplet.bean.UserInfo;
@@ -37,6 +39,9 @@ public class HomeController {
 	private static final Logger logger = Logger.getLogger(HomeController.class);
 	@Autowired
 	private ProductService productService;
+	
+	@Autowired
+	private CategoryService categoryService;
 	@Autowired
 	private UserService userService;
 
@@ -57,7 +62,9 @@ public class HomeController {
 
 	@SuppressWarnings("unchecked")
 	@RequestMapping("/")
-	public String index(HttpSession session, Model model) {
+	public String index(
+			HttpSession session, 
+			Model model) {
 		logger.info("home page");
 		List<Product> womenProducts = productService.loadHotTrendProduct(Constant.WOMAN_PRODUCTS);
 		List<Product> menProducts = productService.loadHotTrendProduct(Constant.MAN_PRODUCTS);
@@ -67,6 +74,10 @@ public class HomeController {
 		model.addAttribute("productsWomen", womenProducts);
 		model.addAttribute("productsMen", menProducts);
 		model.addAttribute("recentlyViewedProducts", recentlyViewedProducts);
+		
+		List<Category> rootCategories = categoryService.loadCategoryWithParentId(Constant.ROOT_PARENID);
+		session.setAttribute("rootCategories", rootCategories);
+		
 
 		return "views/web/home/index";
 	}

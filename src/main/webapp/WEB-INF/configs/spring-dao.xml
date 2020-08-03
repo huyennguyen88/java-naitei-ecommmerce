@@ -17,6 +17,12 @@
 	<bean id="ProductDAO" class="vn.triplet.dao.impl.ProductDAOImpl">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
+	
+	<bean id="CategoryDAO" class="vn.triplet.dao.impl.CategoryDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+		
+	
 
 	<bean id="OrderDAO" class="vn.triplet.dao.impl.OrderDAOImpl">
 		<property name="sessionFactory" ref="sessionFactory" />
