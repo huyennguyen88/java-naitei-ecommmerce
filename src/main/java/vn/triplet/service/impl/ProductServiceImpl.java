@@ -13,7 +13,7 @@ import vn.triplet.service.ProductService;
 
 public class ProductServiceImpl extends BaseServiceImpl implements ProductService{
 
-	private static final Logger logger = Logger.getLogger(UserServiceImpl.class);
+	private static final Logger logger = Logger.getLogger(ProductServiceImpl.class);
 	
 	@Autowired
 	private ProductDAO productDAO;

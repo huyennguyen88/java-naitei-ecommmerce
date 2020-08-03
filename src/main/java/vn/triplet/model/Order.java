@@ -40,7 +40,7 @@ public class Order {
 	private String receiver_phone;
 
 	public enum Status {
-		PENDING, ACCEPTED, REJECTED
+		PENDING, ACCEPTED, REJECTED, CANCELED
 	};
 
 	@Column(columnDefinition = "enum('PENDING','ACCEPTED','REJECTED','CANCELED')", nullable = false)

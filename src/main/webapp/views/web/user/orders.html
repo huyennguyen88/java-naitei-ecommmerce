@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="views/web/layout/base-layout">
+
+
+<div layout:fragment="body">
+	<div class="container">
+		<div th:if="${msg != null}" class="alert alert-dismissible "
+			th:classappend="${css == 'error' ? 'alert-danger' : 'alert-success'}" role="alert">
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+			<strong><span th:text="${msg}"></span></strong>
+		</div>
+		<div class="row">
+
+			<div class="col-sm-3">
+				<div th:replace="views/web/user/sidebar :: sidebar"></div>
+			</div>
+			<div class="col-sm-9">
+				<!-- DataTales Example -->
+				<div class="card shadow mb-4">
+					<div class="card-header py-3">
+						<h6 class="m-0 font-weight-bold text-primary">Order summary</h6>
+					</div>
+					<div class="card-body">
+						<div class="table-responsive">
+							<table class="table table-bordered table-striped" id="dataTable" width="100%"
+								cellspacing="0">
+								<thead>
+									<tr>
+										<th>#</th>
+										<th>Order ID</th>
+										<th>Receiver's name</th>
+										<th>Receiver's address</th>
+										<th>Order date</th>
+										<th>Status</th>
+										<th>Action</th>
+									</tr>
+								</thead>
+								<tfoot>
+									<tr>
+										<th>#</th>
+										<th>Order ID</th>
+										<th>Customer's name</th>
+										<th>Receiver's name</th>
+										<th>Receiver's address</th>
+										<th>Order date</th>
+										<th>Status</th>
+										<th>Action</th>
+									</tr>
+								</tfoot>
+
+								<tbody th:if="${orders!=null}">
+									<th:block th:each="order, iter : ${orders}">
+										<tr>
+											<td th:text="${iter.index+1}"></td>
+											<td th:text="${'OD00'+ order.id}"></td>
+											<td th:text="${order.user.name}"></td>
+											<td th:text="${order.receiver_name}"></td>
+											<td th:text="${order.receiver_address}"></td>
+											<td th:text="${order.create_time}"></td>
+											<td><span th:text="${order.status}" class="badge badge-pill badge-info"></span></td>
+											<td class="text-center">
+												<a th:href="@{/orders/{id}(id=${order.id})}" class=" btn btn-info btn-circle">
+													<i class="fas fa-info-circle"></i>
+												</a>
+											</td>
+										</tr>
+									</th:block>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+	</div>
+</div>
+
+</html>
