@@ -2,6 +2,7 @@ package vn.triplet.dao.impl;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.hibernate.SessionFactory;
@@ -62,7 +63,7 @@ public class ProductDAOImpl extends GenericDAO<Integer, Product> implements Prod
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Product> loadProductWithCategoryID(int categoryId, int productId) {
+	public List<Product> loadProductWithCategoryId(int categoryId, int productId) {
 		if(productId != Constant.NONE_PRODUCT_ID) {
 			return getSession().createQuery("FROM Product WHERE id!=:productId AND category_id=:categoryId ORDER BY rate_avg DESC")
 					.setParameter("productId", productId)
@@ -75,6 +76,15 @@ public class ProductDAOImpl extends GenericDAO<Integer, Product> implements Prod
 					.setParameter("categoryId", categoryId)
 					.getResultList();
 		}
+	}
+
+	@Override
+	public List<Product> loadProductWithListProductId(List<Integer> ids) {
+		List<Product> products = new LinkedList<Product>();
+		for(int id : ids) {
+			products.add(findById(id));
+		}
+		return products;
 	}
 	
 	

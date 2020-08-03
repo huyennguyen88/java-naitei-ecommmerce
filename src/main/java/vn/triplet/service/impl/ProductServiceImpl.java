@@ -63,9 +63,21 @@ public class ProductServiceImpl extends BaseServiceImpl implements ProductServic
 	}
 
 	@Override
-	public List<Product> loadProductWithCategoryID(int categoryId, int productId) {
+	public List<Product> loadProductWithCategoryId(int categoryId, int productId) {
 		try{
-			List<Product> products = productDAO.loadProductWithCategoryID(categoryId, productId);
+			List<Product> products = productDAO.loadProductWithCategoryId(categoryId, productId);
+			products = Converter.parseInformationOfProduct(products);
+			return products;
+		} catch(Exception e) {
+			logger.error(e);
+			return null;
+		}
+	}
+
+	@Override
+	public List<Product> loadProductWithListProductId(List<Integer> ids) {
+		try{
+			List<Product> products = productDAO.loadProductWithListProductId(ids);
 			products = Converter.parseInformationOfProduct(products);
 			return products;
 		} catch(Exception e) {

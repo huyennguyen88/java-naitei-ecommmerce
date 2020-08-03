@@ -1,5 +1,6 @@
 package vn.triplet.controller.web;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,13 +23,18 @@ public class HomeController {
 	@Autowired
 	private ProductService productService;
 
+	@SuppressWarnings("unchecked")
 	@RequestMapping("/")
-	public String index(Model model) {
+	public String index(
+			HttpSession session,
+			Model model) {
 		List<Product> womenProducts = productService.loadHotTrendProduct(Constant.WOMAN_PRODUCTS);
 		List<Product> menProducts = productService.loadHotTrendProduct(Constant.MAN_PRODUCTS);
+		List<Product> recentlyViewedProducts = productService.loadProductWithListProductId((List<Integer>) session.getAttribute("recentlyViewedProductIds"));
 		
 		model.addAttribute("productsWomen", womenProducts);
 		model.addAttribute("productsMen", menProducts);
+		model.addAttribute("recentlyViewedProducts", recentlyViewedProducts);
 		
 		return "views/web/home/index";
 	}

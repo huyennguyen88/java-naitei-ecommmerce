@@ -8,6 +8,9 @@ public interface ProductService extends BaseService<Integer, Product>{
 
 	List<Product> loadHotTrendProduct(int gender);
 	
-	List<Product> loadProductWithCategoryID(int categoryId, int productId);
+	List<Product> loadProductWithCategoryId(int categoryId, int productId);
+	
+	List<Product> loadProductWithListProductId(List<Integer> ids);
+
 	
 }
