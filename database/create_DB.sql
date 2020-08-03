@@ -1,3 +1,7 @@
+/*
+CREATE DB
+*/
+
 DROP SCHEMA IF EXISTS `tripletclothes`;
 CREATE SCHEMA `tripletclothes` ;
 use tripletclothes;
@@ -38,6 +42,7 @@ CREATE TABLE `Orders` (
 	`receiver_address` VARCHAR(255) NOT NULL,
 	`receiver_phone` VARCHAR(255) NOT NULL,
 	`status` ENUM('PENDING','ACCEPTED','REJECTED','CANCELED') NOT NULL DEFAULT 'PENDING',
+    `total` decimal(15,0) NOT NULL,
     `create_time` timestamp default current_timestamp,
     `update_time` timestamp default current_timestamp on update current_timestamp,
 	PRIMARY KEY (`id`)
@@ -47,6 +52,7 @@ CREATE TABLE `Categories` (
 	`id` INT NOT NULL AUTO_INCREMENT,
 	`name` VARCHAR(255) NOT NULL,
 	`parent_id` INT NULL,
+    `path` text,
     `create_time` timestamp default current_timestamp,
     `update_time` timestamp default current_timestamp on update current_timestamp,
     `delete_time` timestamp null,
@@ -102,5 +108,3 @@ ALTER TABLE `Rates` ADD CONSTRAINT `Rates_fk0` FOREIGN KEY (`product_id`) REFERE
 ALTER TABLE `Rates` ADD CONSTRAINT `Rates_fk1` FOREIGN KEY (`user_id`) REFERENCES `Users`(`id`);
 
 ALTER TABLE `Suggests` ADD CONSTRAINT `Suggests_fk0` FOREIGN KEY (`user_id`) REFERENCES `Users`(`id`);
-
-
