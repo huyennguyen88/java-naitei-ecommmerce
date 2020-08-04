@@ -38,7 +38,7 @@ public class ProductDAOImpl extends GenericDAO<Integer, Product> implements Prod
 				"HAVING orderitems.product_id " + 
 				"IN (SELECT id " + 
 					"FROM tripletclothes.products " + 
-					"WHERE image LIKE '%image-" + gender + "-%') " +
+					"WHERE image LIKE '%image-" + ((gender < 10)? "0" + gender : gender)  + "-%') " +
 				"AND SUM(orderitems.quantity) > (SELECT AVG(quantity) " + 
 												"FROM (SELECT SUM(quantity) AS 'quantity' " + 
 												"FROM orderitems " + 
@@ -72,8 +72,8 @@ public class ProductDAOImpl extends GenericDAO<Integer, Product> implements Prod
 					.getResultList();
 		}
 		else {
-			return getSession().createQuery("FROM Product WHERE image LIKE '%-:categoryID-%' ORDER BY rate_avg DESC")
-					.setParameter("categoryId", categoryId)
+			return getSession().createQuery("FROM Product WHERE image LIKE '%-:categoryId-%' ORDER BY rate_avg DESC")
+					.setParameter("categoryId", ((categoryId < 10)? "0" + categoryId : categoryId))
 					.getResultList();
 		}
 	}
