@@ -16,8 +16,12 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
 
 	@Override
 	public User findById(Serializable key) {
-
-		return getUserDAO().findById(key);
+		try {
+			return getUserDAO().findById(key);
+		} catch (Exception e) {
+			logger.error(e);
+			throw e;
+		}
 	}
 
 	@Override
