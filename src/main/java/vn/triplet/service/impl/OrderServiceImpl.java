@@ -3,6 +3,7 @@ package vn.triplet.service.impl;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.HashMap;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -115,6 +116,33 @@ public class OrderServiceImpl extends BaseServiceImpl implements OrderService {
 			logger.error(e);
 			throw e;
 		}
+	}
+
+	@Override
+	public List<Order> loadOrders() {
+		return getOrderDAO().loadOrders();
+	}
+
+	@Override
+	public List<Order> loadOrdersByStatus(int stt) {
+		Status status;
+		switch (stt) {
+		case 1:
+			status = Status.PENDING;
+			break;
+		case 2:
+			status = Status.ACCEPTED;
+			break;
+		case 3:
+			status = Status.REJECTED;
+			break;
+		default:
+			status = Status.CANCELED;
+			break;
+		}
+		;
+		return getOrderDAO().loadOrdersByStatus(status);
+
 	}
 
 }

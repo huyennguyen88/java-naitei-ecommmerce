@@ -20,7 +20,7 @@ import vn.triplet.service.UserService;
 public class UserController {
 
 	@Autowired
-	UserService userService;
+	private UserService userService;
 
 	@GetMapping(value = { "", "/" })
 	public String index(Model model) {
