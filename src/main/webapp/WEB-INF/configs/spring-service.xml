@@ -25,7 +25,7 @@
 			</bean>
 		</property>
 	</bean>
-	
+
 	<bean id="orderService" parent="baseTransactionProxy">
 		<property name="target">
 			<bean class="vn.triplet.service.impl.OrderServiceImpl">
@@ -33,12 +33,11 @@
 			</bean>
 		</property>
 	</bean>
-	
-	<bean id="orderItemService" parent="baseTransactionProxy">
+
+	<bean id="rateService" parent="baseTransactionProxy">
 		<property name="target">
-			<bean class="vn.triplet.service.impl.OrderItemServiceImpl">
-				<property name="orderItemDAO" ref="OrderItemDAO" />
-				<property name="productDAO" ref="ProductDAO" />
+			<bean class="vn.triplet.service.impl.RateServiceImpl">
+				<property name="rateDAO" ref="RateDAO" />
 			</bean>
 		</property>
 	</bean>

@@ -16,6 +16,16 @@
 	<!-- Single -->
 	<div class="innerf-pages section py-5">
 		<div class="container">
+			<div th:if="${value_rate_null!= null}"
+				class="alert alert-danger alert-dismissible alert-autocloseable-danger"
+				role="alert">
+				<strong th:text="${value_rate_null}"></strong>
+			</div>
+			<div th:if="${rating_success!= null}"
+				class="alert alert-success alert-dismissible alert-autocloseable-success"
+				role="alert">
+				<strong th:text="${rating_success}"></strong>
+			</div>
 			<div class="row my-sm-5">
 				<div class="col-lg-4 single-right-left">
 					<div class="grid images_3_of_2">
@@ -202,7 +212,7 @@
 						</div>
 						<!-- card footer -->
 						<div class="card-footer d-flex justify-content-end">
-							<form 
+							<form
 								th:action="@{/cart/add(productId=${product.id}, quantity=${quantity})}">
 								<input th:name="productId" type="hidden"
 									th:value="${product.id}" /> <input th:name="quantity"
@@ -219,53 +229,74 @@
 			</div>
 		</div>
 	</div>
-	<section th:if="${recentlyViewedProducts} != null" class="tabs_pro py-md-5 pt-sm-3 pb-5">
+	<section th:if="${recentlyViewedProducts} != null"
+		class="tabs_pro py-md-5 pt-sm-3 pb-5">
 		<div class="tabs tabs-style-line pt-md-1">
 			<div id="clothing-nav-content" class="tab-content py-sm-1">
 				<div class="container">
 					<div role="tabpanel" class="tab-pane fade show active" id="women"
 						aria-labelledby="women-tab">
 						<h4 class="rad-txt text-capitalize">recently viewed products</h4>
-						<div id="owl-demo" class="owl-carousel text-center card-group my-5">
-							<div class="item" th:each="product, iter : ${recentlyViewedProducts}">
+						<div id="owl-demo"
+							class="owl-carousel text-center card-group my-5">
+							<div class="item"
+								th:each="product, iter : ${recentlyViewedProducts}">
 								<!-- card -->
 								<div class="card product-men p-3">
 									<div class="men-thumb-item">
-										<img th:src="@{'/assets/images/'+ ${product.images[0]}}" alt="img" class="card-img-top">
+										<img th:src="@{'/assets/images/'+ ${product.images[0]}}"
+											alt="img" class="card-img-top">
 										<div class="men-cart-pro">
 											<div class="inner-men-cart-pro">
-												<a th:href="@{/products/{id}(id=${product.id})}" class="link-product-add-cart">Quick
-													View</a>
+												<a th:href="@{/products/{id}(id=${product.id})}"
+													class="link-product-add-cart">Quick View</a>
 											</div>
 										</div>
 									</div>
 									<!-- card body -->
 									<div class="card-body  py-3 px-2" style="text-align: inherit;">
-										<h5 class="card-title text-capitalize" th:text="${product.name}"
-											style="height: 60px;"></h5>
-										<p><span th:text="${product.priceString}"></span></p>
+										<h5 class="card-title text-capitalize"
+											th:text="${product.name}" style="height: 60px;"></h5>
+										<p>
+											<span th:text="${product.priceString}"></span>
+										</p>
 										<div>
 											<!--First Star-->
-											<i class="fa fa-star-o checkedStar" th:if="${product.rate_avg == 0}"></i>
-											<i class="fa fa-star-half-o checkedStar" th:if="${product.rate_avg > 0 && product.rate_avg < 1}"></i>
-											<i class="fa fa-star checkedStar" th:if="${product.rate_avg >= 1}"></i>
+											<i class="fa fa-star-o checkedStar"
+												th:if="${product.rate_avg == 0}"></i> <i
+												class="fa fa-star-half-o checkedStar"
+												th:if="${product.rate_avg > 0 && product.rate_avg < 1}"></i>
+											<i class="fa fa-star checkedStar"
+												th:if="${product.rate_avg >= 1}"></i>
 											<!--Second Star-->
-											<i class="fa fa-star-o checkedStar" th:if="${product.rate_avg <= 1}"></i>
-											<i class="fa fa-star-half-o checkedStar" th:if="${product.rate_avg > 1 && product.rate_avg < 2}"></i>
-											<i class="fa fa-star checkedStar" th:if="${product.rate_avg >= 2}"></i>
+											<i class="fa fa-star-o checkedStar"
+												th:if="${product.rate_avg <= 1}"></i> <i
+												class="fa fa-star-half-o checkedStar"
+												th:if="${product.rate_avg > 1 && product.rate_avg < 2}"></i>
+											<i class="fa fa-star checkedStar"
+												th:if="${product.rate_avg >= 2}"></i>
 											<!--Third Star-->
-											<i class="fa fa-star-o checkedStar" th:if="${product.rate_avg <= 2}"></i>
-											<i class="fa fa-star-half-o checkedStar" th:if="${product.rate_avg > 2 && product.rate_avg < 3}"></i>
-											<i class="fa fa-star checkedStar" th:if="${product.rate_avg >= 3}"></i>
+											<i class="fa fa-star-o checkedStar"
+												th:if="${product.rate_avg <= 2}"></i> <i
+												class="fa fa-star-half-o checkedStar"
+												th:if="${product.rate_avg > 2 && product.rate_avg < 3}"></i>
+											<i class="fa fa-star checkedStar"
+												th:if="${product.rate_avg >= 3}"></i>
 											<!--Fourth Star-->
-											<i class="fa fa-star-o checkedStar" th:if="${product.rate_avg <= 3}"></i>
-											<i class="fa fa-star-half-o checkedStar" th:if="${product.rate_avg > 3 && product.rate_avg < 4}"></i>
-											<i class="fa fa-star checkedStar" th:if="${product.rate_avg >= 4}"></i>
+											<i class="fa fa-star-o checkedStar"
+												th:if="${product.rate_avg <= 3}"></i> <i
+												class="fa fa-star-half-o checkedStar"
+												th:if="${product.rate_avg > 3 && product.rate_avg < 4}"></i>
+											<i class="fa fa-star checkedStar"
+												th:if="${product.rate_avg >= 4}"></i>
 											<!--Sixth Star-->
-											<i class="fa fa-star-o checkedStar" th:if="${product.rate_avg <= 4}"></i>
-											<i class="fa fa-star-half-o checkedStar" th:if="${product.rate_avg > 4 && product.rate_avg < 5}"></i>
-											<i class="fa fa-star checkedStar" th:if="${product.rate_avg == 5}"></i>
-											
+											<i class="fa fa-star-o checkedStar"
+												th:if="${product.rate_avg <= 4}"></i> <i
+												class="fa fa-star-half-o checkedStar"
+												th:if="${product.rate_avg > 4 && product.rate_avg < 5}"></i>
+											<i class="fa fa-star checkedStar"
+												th:if="${product.rate_avg == 5}"></i>
+
 										</div>
 										<!-- <div class="card-text d-flex justify-content-between">
 											khuyến mại
@@ -275,26 +306,26 @@
 									</div>
 									<!-- card footer -->
 									<div class="card-footer d-flex justify-content-end">
-										<form	th:action="@{/cart/add(productId=${product.id}, quantity=${quantity})}">
-										<input th:name="productId" type="hidden"
-											th:value="${product.id}" />
-										<input th:name="quantity" type="hidden"
-											th:value="1" />	
-										<button type="submit" class="hub-cart phub-cart btn">
-											<i class="fa fa-cart-plus" aria-hidden="true"></i>
-										</button>
+										<form
+											th:action="@{/cart/add(productId=${product.id}, quantity=${quantity})}">
+											<input th:name="productId" type="hidden"
+												th:value="${product.id}" /> <input th:name="quantity"
+												type="hidden" th:value="1" />
+											<button type="submit" class="hub-cart phub-cart btn">
+												<i class="fa fa-cart-plus" aria-hidden="true"></i>
+											</button>
 
-									</form>
+										</form>
 									</div>
 								</div>
 								<!-- //card -->
 							</div>
-							
+
 							<div class="item">
 								<div class="product-men p-3 text-center">
-									<img th:src="@{/assets/web/images/p2.png}" class="img-responsive" alt="" /> <a
-										href="women.html" class="btn btn-lg bg-info text-white">view
-										more</a>
+									<img th:src="@{/assets/web/images/p2.png}"
+										class="img-responsive" alt="" /> <a href="women.html"
+										class="btn btn-lg bg-info text-white">view more</a>
 								</div>
 							</div>
 						</div>
@@ -304,5 +335,105 @@
 		</div>
 	</section>
 	<!--// Single -->
+	<!--Leave a rating  -->
+	<div class="container">
+		<h3>Customer Comments</h3>
+		<div class="row" style="margin-top: 40px;">
+			<div class="col-md-6">
+				<div class="well well-sm">
+					<form th:if="${session.currentUser==null}" th:action="@{/login}">
+						<button class="btn btn-success btn-green">Login to Review
+							this</button>
+					</form>
 
+					<a th:if="${session.currentUser!=null}"
+						class="btn btn-success btn-green" href="#reviews-anchor"
+						id="open-review-box">Leave a Review</a>
+
+
+					<div class="row" id="post-review-box" style="display: none;">
+						<div class="col-md-12">
+							<form th:object="${newRate}" accept-charset="UTF-8"
+								th:action="@{/ratings/add/(productId=${product.id})}"
+								method="post">
+								<input value="0" class="rating" type="hidden"
+									data-filled="fa fa-star fa-lg checkedStar" th:field="*{value}"
+									data-empty="fa fa-star-o fa-lg checkedStar" th:name="value">
+								<input th:name="productId" type="hidden"
+									th:value="${product.id}" />
+								<textarea class="form-control animated" cols="50"
+									id="new-review" name="comment" th:field="*{content}"
+									placeholder="Enter your review here..." rows="5"></textarea>
+
+								<div class="text-right">
+									<button class="btn btn-danger btn-sm" href="#" id="close-review-box"
+										style="display: none; margin-right: 10px; height:45px;width:85px;font-size:1.25rem">
+										<i class="fas fa-times"></i>Cancel
+									</button>
+									<button class="btn btn-success btn-lg" style="margin:5px;height:45px" type="submit"><i class="far fa-check-circle"></i>Save</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<br />
+	<!--List comment  -->
+	<div class="container">
+		<div></div>
+		<div class="card" th:if="${ratings==null}">
+			<h4>This product is not yet reviewed</h4>
+		</div>
+		<div class="card" th:if="${ratings!=null}" th:each="item:${ratings}">
+			<div class="card-body">
+				<div class="row">
+					<div class="col-md-2">
+						<img th:src="@{'/assets/images/'+${item.user.avatar}}"
+							class="img img-rounded img-fluid" /> <a class="float-left"
+							th:href="@{'/users/'+${item.user.id}}"><strong
+							th:text="${item.user.name}"></strong></a>
+						<p class="text-secondary text-center"
+							th:text="${item.create_time}"></p>
+					</div>
+					<div class="col-md-10">
+						<p>
+
+							<!--ONE  -->
+							<span class="float-left"><i
+								class="fa fa-star  checkedStar" th:if="${item.value!=null}"></i>
+							</span>
+							<!--TWO  -->
+							<span class="float-left"><i
+								class="fa fa-star checkedStar"
+								th:if="${item.value==T(vn.triplet.model.Rate.Value).TWO or
+								item.value==T(vn.triplet.model.Rate.Value).THREE or item.value==T(vn.triplet.model.Rate.Value).FOUR or
+								item.value==T(vn.triplet.model.Rate.Value).FIVE}"></i></span>
+							<!--THREE  -->
+							<span class="float-left"><i
+								class="fa fa-star checkedStar"
+								th:if="${item.value==T(vn.triplet.model.Rate.Value).THREE or item.value==T(vn.triplet.model.Rate.Value).FOUR or
+								item.value==T(vn.triplet.model.Rate.Value).FIVE}"></i></span>
+							<!--FOUR  -->
+							<span class="float-left"><i
+								class="fa fa-star checkedStar"
+								th:if="${item.value==T(vn.triplet.model.Rate.Value).FOUR or
+								item.value==T(vn.triplet.model.Rate.Value).FIVE}"></i></span>
+							<!--FIVE  -->
+							<span class="float-left"><i
+								class="fa fa-star checkedStar"
+								th:if="${item.value==T(vn.triplet.model.Rate.Value).FIVE}"></i></span>
+						</p>
+						<div class="clearfix"></div>
+						<p th:text="${item.content}"></p>
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
 </div>

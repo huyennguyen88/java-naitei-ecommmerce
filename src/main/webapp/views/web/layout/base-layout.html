@@ -16,17 +16,21 @@
 
 <link th:href="@{/assets/web/css/bootstrap.css}" rel="stylesheet"
 	type="text/css" media="all">
+<link th:href="@{/assets/web/css/bootstrap-rating.css}" rel="stylesheet"
+	type="text/css">
 <link th:href="@{/assets/web/css/checkout.css}" rel="stylesheet"
 	type="text/css" media="all">
 <!-- stars css -->
 <link th:href="@{/assets/web/css/stars.css}" rel="stylesheet"
 	type="text/css" media="all">
-
+<link th:href="@{/assets/web/css/fontaw.css}" rel="stylesheet"
+	type="text/css" media="all">
 <!-- shop css -->
 <link th:href="@{/assets/web/css/shop.css}" type="text/css"
 	rel="stylesheet" media="all">
 <link th:href="@{/assets/web/css/owl.carousel.min.css}" rel="stylesheet">
-
+<link th:href="@{/assets/web/css/bootstrap.min.css}" rel="stylesheet"
+	type="text/css">
 <!-- Owl-Carousel-CSS -->
 <link th:href="@{/assets/web/css/style.css}" rel="stylesheet"
 	type="text/css" media="all">
@@ -45,7 +49,8 @@
 <link th:href="@{/assets/web/css/fontawesome-all.min.css}"
 	rel="stylesheet">
 <!-- Font Awesome Icon Library -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
 <!-- online-fonts -->
@@ -157,12 +162,12 @@
 			}
 		});
 	</script>
-	
+
 	<!-- cart-js -->
 	<script th:src="@{/assets/web/js/minicart.js}">
 		
 	</script>
-<!-- 	<script>
+	<!-- 	<script>
 		hub.render();
 
 		hub.cart.on('new_checkout', function(evt) {
@@ -177,7 +182,6 @@
 		});
 	</script> -->
 
-	
 	<!-- price range (top products) -->
 	<script th:src="@{/assets/web/js/jquery-ui.js}"></script>
 	<script>
@@ -204,7 +208,7 @@
 				}); //]]>
 	</script>
 
-	
+
 	<!-- start-smooth-scrolling -->
 	<script th:src="@{/assets/web/js/move-top.js}"></script>
 	<script th:src="@{/assets/web/js/easing.js}"></script>
@@ -220,7 +224,7 @@
 		});
 	</script>
 
-	
+
 	<!-- smooth-scrolling-of-move-up -->
 	<script>
 		$(document).ready(function() {
@@ -240,17 +244,17 @@
 		});
 	</script>
 	<script th:src="@{/assets/web/js/SmoothScroll.min.js}"></script>
-	
+
 	<!-- FlexSlider -->
 	<script th:src="@{/assets/web/js/jquery.flexslider.js}"></script>
 	<script>
-	    // Can also be used with $(document).ready()
-	    $(window).load(function () {
-	        $('.flexslider1').flexslider({
-	            animation: "slide",
-	            controlNav: "thumbnails"
-	        });
-	    });
+		// Can also be used with $(document).ready()
+		$(window).load(function() {
+			$('.flexslider1').flexslider({
+				animation : "slide",
+				controlNav : "thumbnails"
+			});
+		});
 	</script>
 
 	<!-- zoom -->
@@ -260,7 +264,9 @@
 
 	<!-- Placed at the end of the document so the pages load faster -->
 	<script th:src="@{/assets/web/js/bootstrap.js}"></script>
-	
 
+
+	<script th:src="@{/assets/web/js/rating.js}"></script>
+	<script type="text/javascript" th:src="@{/assets/web/js/bootstrap-rating.js}"></script>
 </body>
 </html>

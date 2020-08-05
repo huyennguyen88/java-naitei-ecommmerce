@@ -5,7 +5,6 @@ import java.util.Arrays;
 
 import vn.triplet.model.Product;
 import vn.triplet.helper.Converter;
-
 public class ProductInfo {
 
 	private int id;

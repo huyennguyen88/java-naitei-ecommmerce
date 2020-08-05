@@ -78,7 +78,6 @@ public class HomeController {
 
 	@RequestMapping("/register")
 	public String register(Model model) {
-
 		model.addAttribute("user", new UserInfo());
 		return "views/web/layout/signup-modal";
 	}
