@@ -6,6 +6,7 @@ import org.apache.log4j.Logger;
 import org.hibernate.SessionFactory;
 import vn.triplet.dao.GenericDAO;
 import vn.triplet.dao.UserDAO;
+import vn.triplet.model.Order;
 import vn.triplet.model.User;
 
 public class UserDAOImpl extends GenericDAO<Integer, User> implements UserDAO {
@@ -41,7 +42,5 @@ public class UserDAOImpl extends GenericDAO<Integer, User> implements UserDAO {
 			return true;
 		return false;
 	}
-
-
-
+	
 }

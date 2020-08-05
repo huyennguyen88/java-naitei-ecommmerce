@@ -18,62 +18,47 @@
 				<div th:replace="views/web/user/sidebar :: sidebar"></div>
 			</div>
 			<div class="col-sm-9">
-				<!-- DataTales Example -->
-				<div class="card shadow mb-4">
-					<div class="card-header py-3">
-						<h6 class="m-0 font-weight-bold text-primary">Order summary</h6>
-					</div>
-					<div class="card-body">
-						<div class="table-responsive">
-							<table class="table table-bordered table-striped" id="dataTable" width="100%"
-								cellspacing="0">
-								<thead>
-									<tr>
-										<th>#</th>
-										<th>Order ID</th>
-										<th>Receiver's name</th>
-										<th>Receiver's address</th>
-										<th>Order date</th>
-										<th>Status</th>
-										<th>Action</th>
-									</tr>
-								</thead>
-								<tfoot>
-									<tr>
-										<th>#</th>
-										<th>Order ID</th>
-										<th>Customer's name</th>
-										<th>Receiver's name</th>
-										<th>Receiver's address</th>
-										<th>Order date</th>
-										<th>Status</th>
-										<th>Action</th>
-									</tr>
-								</tfoot>
-
-								<tbody th:if="${orders!=null}">
-									<th:block th:each="order, iter : ${orders}">
-										<tr>
-											<td th:text="${iter.index+1}"></td>
-											<td th:text="${'OD00'+ order.id}"></td>
-											<td th:text="${order.user.name}"></td>
-											<td th:text="${order.receiver_name}"></td>
-											<td th:text="${order.receiver_address}"></td>
-											<td th:text="${order.create_time}"></td>
-											<td><span th:text="${order.status}" class="badge badge-pill badge-info"></span></td>
-											<td class="text-center">
-												<a th:href="@{/orders/{id}(id=${order.id})}" class=" btn btn-info btn-circle">
-													<i class="fas fa-info-circle"></i>
-												</a>
-											</td>
-										</tr>
+				<div th:if="${user!=null}">
+					<th:block th:each="order, iter : ${user.orders}">
+						<div class="card shadow mb-4">
+							<div class="card-header py-3">
+								<h6 th:text="${order.status}" class="m-0 font-weight-bold text-primary"></h6>
+							</div>
+							<div class="card-body">
+								<ul class="list-unstyled">
+									<th:block th:each="orderItem, iter : ${order.orderItems}">
+										<li class="media">
+											<div>
+												<img th:src="@{'/assets/images/'+${#strings.substringBefore(orderItem.product.image,'/')}}" alt="img"  class="w-25 h-25 p-3 img-responsive img-thumbnail rounded">
+											</div>
+						
+											<div class="media-body">
+											  <h5 th:text="${orderItem.product.name}" class="mt-0 mb-1"></h5>
+											  <h6 class="text-info font-italic" th:text="${orderItem.product.price+ '&#8363'}"></h6>
+											  <p th:text = "${'x'+ orderItem.quantity}"></p>
+											</div>
+										</li>
+										<hr>
 									</th:block>
-								</tbody>
-							</table>
+									<li class="container">
+										<div class="row justify-content-between">
+											<div>
+												<span class="font-weight-light">Order at: </span><span class="ml-2" th:text="${order.create_time}"></span>
+											</div>
+											<div>
+												<span class="text-mute">Total price:</span><span class="ml-2 text-primary h3" th:text="${'&#8363 '+ order.total}"></span>
+											</div>
+										</div>
+									</li>
+									<hr>
+									<li class="text-right">
+										<a class="btn btn-outline-success " href="#" role="button">Order detail <i class="fas fa-angle-double-right"></i></a>
+									</li>
+								  </ul>
+							</div>
 						</div>
-					</div>
+					</th:block>
 				</div>
-
 			</div>
 
 		</div>

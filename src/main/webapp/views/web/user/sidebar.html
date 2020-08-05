@@ -1,0 +1,13 @@
+<div th:fragment="sidebar">
+	<ul class="list-group">
+		<!-- <li class="list-group-item list-group-item-secondary text-muted h4">Activity
+			<i class="fa fa-dashboard fa-1x"></i>
+		</li> -->
+		<a th:href="@{/users/{id}(id=${user.id})}" class="list-group-item list-group-item-action list-group-item-light  text-right">
+			<span class="pull-left"><strong>My Account</strong></span>
+		</a>
+		<a th:href="@{/users/{id}/orders(id=${user.id})}" class="list-group-item list-group-item-action list-group-item-light  text-right">
+			<span class="pull-left"><strong>Orders</strong></span>
+		</a>
+	</ul>
+</div>

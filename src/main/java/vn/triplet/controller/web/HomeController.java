@@ -63,7 +63,7 @@ public class HomeController {
 		List<Product> menProducts = productService.loadHotTrendProduct(Constant.MAN_PRODUCTS);
 		List<Product> recentlyViewedProducts = productService
 				.loadProductWithListProductId((List<Integer>) session.getAttribute("recentlyViewedProductIds"));
-		
+
 		model.addAttribute("productsWomen", womenProducts);
 		model.addAttribute("productsMen", menProducts);
 		model.addAttribute("recentlyViewedProducts", recentlyViewedProducts);
@@ -92,17 +92,18 @@ public class HomeController {
 			redirectAttributes.addFlashAttribute("loginsuccess", msg_login);
 			session.setAttribute("msg", user.getName().toUpperCase());
 			session.setAttribute("currentUser", user.getId());
+			
 			if (user.getRole().toString().equals("ADMIN")) {
 				session.setAttribute("roleUser", ADMIN);
-			} else {
-				session.setAttribute("roleUser", USER);
+				return "redirect:/dashboard";
 			}
+			session.setAttribute("roleUser", USER);
+			
 			if (session.getAttribute("cart") != null)
 				return "redirect:/cart/";
 			return "redirect:/";
-		} else {
-			model.addAttribute("error", Login_error);
 		}
+		model.addAttribute("error", Login_error);
 		return "views/web/layout/signin-modal";
 	}
 
