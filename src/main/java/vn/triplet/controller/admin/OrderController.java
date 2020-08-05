@@ -62,14 +62,14 @@ public class OrderController {
 			redirectAttributes.addFlashAttribute("msg", msg_notFound);
 			return "redirect:/admin/orders";
 		}
-		
+
 		Status currentStatus = order.getStatus();
 		if (currentStatus != Status.PENDING) {
 			redirectAttributes.addFlashAttribute("css", typeCss);
 			redirectAttributes.addFlashAttribute("msg", message);
-			return "redirect:/admin/orders";
+			return "redirect:/admin/orders/"+order.getId();
 		}
-		
+
 		if (action == 0)
 			status = Status.ACCEPTED;
 		order.setStatus(status);
@@ -77,13 +77,27 @@ public class OrderController {
 		if (orderService.saveOrUpdate(order) == null) {
 			redirectAttributes.addFlashAttribute("css", typeCss);
 			redirectAttributes.addFlashAttribute("msg", message);
-			return "redirect:/admin/orders";
+			return "redirect:/admin/orders/"+order.getId();
 		}
 
 		typeCss = "sucsess";
 		message = stt_changed;
 		redirectAttributes.addFlashAttribute("css", typeCss);
 		redirectAttributes.addFlashAttribute("msg", message);
+		return "redirect:/admin/orders/"+order.getId();
+
+	}
+
+	@RequestMapping("/{id}")
+	String showOrderDetail(@PathVariable("id") int id, Model model, final RedirectAttributes redirectAttributes) {
+		Order order = orderService.findById(id);
+		if (order != null) {
+			model.addAttribute("order", order);
+			return "views/admin/order/order";
+
+		}
+		redirectAttributes.addFlashAttribute("css", "error");
+		redirectAttributes.addFlashAttribute("msg", msg_notFound);
 		return "redirect:/admin/orders";
 
 	}

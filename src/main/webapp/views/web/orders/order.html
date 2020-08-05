@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="views/web/layout/base-layout">
+<div layout:fragment="body">
+    <div class="container">
+        <div th:if="${msg != null}" class="alert alert-dismissible "
+            th:classappend="${css == 'error' ? 'alert-danger' : 'alert-success'}" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <strong><span th:text="${msg}"></span></strong>
+        </div>
+        <div class="row">
+            <div class="col-sm-3">
+                <div th:replace="views/web/user/sidebar :: sidebar"></div>
+            </div>
+            <div class="col-sm-9">
+                <!-- Page Heading -->
+                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                    <h1 class="h3 mb-0 text-gray-800">ORDER DETAIL</h1>
+                </div>
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <span th:text="${'Order id: OD00'+ order.id}"></span><span class="mx-2">|</span>
+                        <span th:text="${order.status}" class="m-0 h6 font-weight-bold text-primary"></span>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled">
+                            <th:block th:each="orderItem, iter : ${order.orderItems}">
+                                <li class="media">
+                                    <div>
+                                        <img th:src="@{'/assets/images/'+${#strings.substringBefore(orderItem.product.image,'/')}}" alt="img"  class="w-25 h-25 p-3 img-responsive img-thumbnail rounded">
+                                    </div>
+                
+                                    <div class="media-body">
+                                      <h5 th:text="${orderItem.product.name}" class="mt-0 mb-1"></h5>
+                                      <h6 class="text-info font-italic" th:text="${orderItem.product.price+ '&#8363'}"></h6>
+                                      <p th:text = "${'x'+ orderItem.quantity}"></p>
+                                    </div>
+                                </li>
+                                <hr>
+                            </th:block>
+                            <li class="container">
+                                <div class="row justify-content-between">
+                                    <div>
+                                        <span class="font-weight-light">Order at: </span><span class="ml-2" th:text="${order.create_time}"></span>
+                                    </div>
+                                    <div>
+                                        <span class="text-mute">Total price:</span><span class="ml-2 text-primary h3" th:text="${'&#8363 '+ order.total}"></span>
+                                    </div>
+                                </div>
+                            </li>
+                            <hr>
+                            <li>
+                                <p class="h4 font-weight-bold text-info">Shipping Address</p>
+                                <p class="m-0" th:text="${order.receiver_name}"></p>
+                                <p class="m-0" th:text="${order.receiver_phone}"></p>
+                                <p class="m-0" th:text="${order.receiver_address}"></p>                            
+                            </li>
+                            <li th:if="${order.status == T(vn.triplet.model.Order.Status).PENDING}" class="text-right">
+                                <a class="btn btn-outline-success " th:href="@{/orders/{id}/cancel(id=${order.id})}" role="button">CANCEL<i class="fas fa-check"></i></a>
+                            </li>
+                          </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+</html>
