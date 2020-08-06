@@ -26,6 +26,9 @@ public class Category {
 
 	@Column(name = "name", nullable = false)
 	private String name;
+	
+	@Column(name = "path", nullable = true)
+	private String path;
 
 	@Column(name = "create_time", updatable = false)
 	@Temporal(TemporalType.TIMESTAMP)
@@ -43,8 +46,8 @@ public class Category {
 	@JoinColumn(name = "parent_id")
 	private Category parent;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "parent")
-	private List<Category> sub_categories;
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "parent")
+	private List<Category> subCategories;
 	
 	@OneToMany(fetch = FetchType.LAZY,mappedBy = "category")
 	private List<Product> products;
@@ -63,6 +66,14 @@ public class Category {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getPath() {
+		return path;
+	}
+
+	public void setPath(String path) {
+		this.path = path;
 	}
 
 	public Date getCreate_time() {
@@ -97,12 +108,12 @@ public class Category {
 		this.parent = parent;
 	}
 
-	public List<Category> getSub_categories() {
-		return sub_categories;
+	public List<Category> getSubCategories() {
+		return subCategories;
 	}
 
-	public void setSub_categories(List<Category> sub_categories) {
-		this.sub_categories = sub_categories;
+	public void setSubCategories(List<Category> subCategories) {
+		this.subCategories = subCategories;
 	}
 
 	public List<Product> getProducts() {
@@ -113,4 +124,11 @@ public class Category {
 		this.products = products;
 	}
 
+	@Override
+	public String toString() {
+		return "Category [id=" + id + ", name=" + name + ", parent=" + parent + "]";
+	}
+
+	
+	
 }

@@ -5,6 +5,13 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Order;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.hibernate.SessionFactory;
 
 import vn.triplet.dao.GenericDAO;
@@ -71,9 +78,12 @@ public class ProductDAOImpl extends GenericDAO<Integer, Product> implements Prod
 					.setMaxResults(4)
 					.getResultList();
 		}
+		else if(categoryId == Constant.ROOT_PARENID) {
+			return getSession().createQuery("FROM Product ORDER BY rate_avg DESC").getResultList();
+		}
 		else {
-			return getSession().createQuery("FROM Product WHERE image LIKE '%-:categoryId-%' ORDER BY rate_avg DESC")
-					.setParameter("categoryId", ((categoryId < 10)? "0" + categoryId : categoryId))
+			return getSession().createQuery("FROM Product WHERE image LIKE :likeCategoryId ORDER BY rate_avg DESC")
+					.setParameter("likeCategoryId", "%-" + ((categoryId < 10)? "0" + categoryId : categoryId) + "-%")
 					.getResultList();
 		}
 	}
@@ -85,6 +95,87 @@ public class ProductDAOImpl extends GenericDAO<Integer, Product> implements Prod
 			products.add(findById(id));
 		}
 		return products;
+	}
+
+	@Override
+	public List<Object> loadProductWithFilter(
+			int categoryId,
+			String productName, 
+			Integer fromprice, 
+			Integer toprice,
+			Integer rating, 
+			Integer page) {
+		CriteriaBuilder builder = getSession().getCriteriaBuilder();
+		CriteriaQuery<Product> cr = builder.createQuery(Product.class);
+		Root<Product> root = cr.from(Product.class);
+		cr.select(root);
+		
+		List<Predicate> restrictions = new ArrayList<Predicate>();
+		
+		/*
+		 * get product with ancestor id
+		 */
+		if(categoryId != Constant.ROOT_PARENID) {
+			Predicate imageRestriction = builder.like(root.get("image"), "%-" + ((categoryId < 10)? "0" + categoryId : categoryId) + "-%");
+			restrictions.add(imageRestriction);
+		}
+		
+		/*
+		 * get product with name
+		 */
+		if(productName != null) {
+			String[] str = productName.split(" ");
+			Predicate[] nameRestrictions = new Predicate[str.length];
+			int i = 0;
+			for(String s : str) {
+				Predicate nameRestriction = builder.like(root.get("name"), "% " + s + " %");
+				nameRestrictions[i ++] = nameRestriction;
+			}
+			Predicate allNameRestrictions = builder.or(nameRestrictions) ;
+			restrictions.add(allNameRestrictions);
+		}
+		
+		/*
+		 * get product with price
+		 */
+		if(fromprice != null || toprice != null) {
+			if(fromprice != null) {
+				Predicate frompriceRestriction = builder.greaterThanOrEqualTo(root.get("price"), fromprice);
+				restrictions.add(frompriceRestriction);
+			}
+			if(toprice != null) {
+				Predicate topriceRestriction = builder.lessThanOrEqualTo(root.get("price"), toprice);
+				restrictions.add(topriceRestriction);
+			}
+		}
+		
+		/*
+		 * get product with rating
+		 */
+		if(rating != null) {
+			Predicate ratingRestriction = builder.greaterThanOrEqualTo(root.get("rate_avg"), rating);
+			restrictions.add(ratingRestriction);
+		}
+		
+		if(restrictions != null) {
+			Predicate[] restrictionsArray = new Predicate[restrictions.size()];
+			int i = 0;
+			for(Predicate restriction : restrictions) {
+				restrictionsArray[i ++] = restriction;
+			}
+			Predicate allRestrictions = builder.and(restrictionsArray);
+			cr.where(allRestrictions).orderBy(builder.desc(root.get("rate_avg")));
+		}
+		
+		
+		List<Object> objects = new ArrayList<Object>(); 
+		objects.add(getSession().createQuery(cr)
+					.setFirstResult((page - 1)*16)
+					.setMaxResults(16)
+					.getResultList());
+		objects.add(getSession().createQuery(cr).getResultList().size());
+		
+		return objects;
 	}
 	
 	
