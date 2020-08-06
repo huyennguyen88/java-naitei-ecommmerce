@@ -105,17 +105,8 @@ public class OrderController extends BaseController {
 	@RequestMapping("/{id}")
 	String showOrderDetail(@PathVariable("id") int id, Model model, final RedirectAttributes redirectAttributes,
 			HttpServletRequest request) {
-		Order order = orderService.findById(id);
-		User user = loadCurrentUser(request);
-		if (user == null) {
-			return "redirect:/login";
-		}
+		Order order = checkOwner(request, id);
 		if (order == null) {
-			redirectAttributes.addFlashAttribute("css", "error");
-			redirectAttributes.addFlashAttribute("msg", msg_notFound);
-			return "redirect:/";
-		}
-		if (user.getId() != order.getUser().getId()) {
 			redirectAttributes.addFlashAttribute("css", "error");
 			redirectAttributes.addFlashAttribute("msg", msg_notAlow);
 			return "redirect:/";
@@ -127,20 +118,12 @@ public class OrderController extends BaseController {
 	@RequestMapping("/{id}/cancel")
 	String cancelOrder(@PathVariable("id") int id, Model model, final RedirectAttributes redirectAttributes,
 			HttpServletRequest request) {
+		
 		String typeCss = "error";
 		String message = stt_notChange;
-		Order order = orderService.findById(id);
 
-		User user = loadCurrentUser(request);
-		if (user == null) {
-			return "redirect:/login";
-		}
+		Order order = checkOwner(request, id);
 		if (order == null) {
-			redirectAttributes.addFlashAttribute("css", typeCss);
-			redirectAttributes.addFlashAttribute("msg", msg_notFound);
-			return "redirect:/";
-		}
-		if (user.getId() != order.getUser().getId()) {
 			redirectAttributes.addFlashAttribute("css", typeCss);
 			redirectAttributes.addFlashAttribute("msg", msg_notAlow);
 			return "redirect:/";
@@ -166,6 +149,18 @@ public class OrderController extends BaseController {
 		redirectAttributes.addFlashAttribute("msg", message);
 		return "redirect:/orders/" + order.getId();
 
+	}
+
+	private Order checkOwner(HttpServletRequest request, int order_id) {
+		Order order = orderService.findById(order_id);
+		User user = loadCurrentUser(request);
+		if (user == null || order == null) {
+			return null;
+		}
+		if (user.getId() != order.getUser().getId()) {
+			return null;
+		}
+		return order;
 	}
 
 }
