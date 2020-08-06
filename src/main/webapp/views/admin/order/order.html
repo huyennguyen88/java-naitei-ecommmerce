@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head
+	th:replace="views/admin/layout/base-layout :: head(~{this :: title}, ~{this :: .custom-link}, ~{this :: .custom-script})">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="admin page">
+
+	<title>Order Detail</title>
+
+	<link th:href="@{/assets/admin/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
+	<link
+		th:href="@{https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i}"
+		rel="stylesheet">
+
+	<!-- Custom styles for this template-->
+	<link class="custom-link" th:href="@{/assets/admin/css/sb-admin-2.min.css}" rel="stylesheet">
+
+
+</head>
+
+<body id="page-top">
+	<!-- Page Wrapper -->
+	<div id="wrapper">
+
+		<div th:replace="views/admin/layout/sidebar:: sidebar"></div>
+
+		<!-- Content Wrapper -->
+		<div id="content-wrapper" class="d-flex flex-column">
+
+			<!-- Main Content -->
+			<div id="content">
+
+				<div th:replace="views/admin/layout/topbar:: topbar"></div>
+
+				<!-- Begin Page Content -->
+
+				<div class="container-fluid">
+					<div th:if="${msg != null}" class="alert alert-dismissible fade show"
+						th:classappend="${css == 'error' ? 'alert-danger' : 'alert-success'}" role="alert">
+						<strong th:text="${msg}"></strong>
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+
+					<div th:insert="views/admin/layout/base-layout :: content(~{ :: #order-info})">
+						<div id="order-info" class="container">
+							<!-- Page Heading -->
+							<div class="d-sm-flex align-items-center justify-content-between mb-4">
+								<h1 class="h3 mb-0 text-gray-800">ORDER DETAIL</h1>
+							</div>
+							<!-- DataTales Example -->
+							<div class="card shadow mb-4">
+								<div class="card-header py-3">
+									<span th:text="${'Order id: OD00'+ order.id}"></span><span class="mx-2">|</span>
+									<span th:text="${order.status}" class="m-0 h6 font-weight-bold text-primary"></span>
+								</div>
+								<div class="card-body">
+									<ul class="list-unstyled">
+										<th:block th:each="orderItem, iter : ${order.orderItems}">
+											<li class="media">
+												<div>
+													<img th:src="@{'/assets/images/'+${#strings.substringBefore(orderItem.product.image,'/')}}" alt="img"  class="w-25 h-25 p-3 img-responsive img-thumbnail rounded">
+												</div>
+							
+												<div class="media-body">
+												  <h5 th:text="${orderItem.product.name}" class="mt-0 mb-1"></h5>
+												  <h6 class="text-info font-italic" th:text="${orderItem.product.price+ '&#8363'}"></h6>
+												  <p th:text = "${'x'+ orderItem.quantity}"></p>
+												</div>
+											</li>
+											<hr>
+										</th:block>
+										<li class="container">
+											<div class="row justify-content-between">
+												<div>
+													<span class="font-weight-light">Order at: </span><span class="ml-2" th:text="${order.create_time}"></span>
+												</div>
+												<div>
+													<span class="text-mute">Total price:</span><span class="ml-2 text-primary h3" th:text="${'&#8363 '+ order.total}"></span>
+												</div>
+											</div>
+										</li>
+										<hr>
+										<li>
+											<p class="h4 font-weight-bold text-info">Shipping Address</p>
+											<div class="row">
+												<div class="col-md-6">
+													<p class="m-0">From:</p>
+													<a th:href="@{/admin/users/{id}(id=${order.user.id})}" class="m-0" th:text="${'ID: '+ order.user.id}"></a>
+													<p class="m-0" th:text="${order.user.name}"></p>
+													<p class="m-0" th:text="${order.user.phone}"></p>
+													<p class="m-0" th:text="${order.user.address}"></p>
+												</div>
+												<div class="col-md-6">
+													<p>To:</p>
+													<p class="m-0" th:text="${order.receiver_name}"></p>
+													<p class="m-0" th:text="${order.receiver_phone}"></p>
+													<p class="m-0" th:text="${order.receiver_address}"></p>
+												</div>
+											</div>
+										</li>
+										<hr>
+										<li th:if="${order.status == T(vn.triplet.model.Order.Status).PENDING}" class="text-right">
+											<a class="btn btn-outline-success " th:href="@{/admin/orders/{id}/type(id=${order.id},action=0)}" role="button">ACCEPT<i class="fas fa-check"></i></a>
+										</li>
+									  </ul>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+				<!-- /.container-fluid -->
+
+			</div>
+			<!-- End of Main Content -->
+
+			<div th:replace="views/admin/layout/footer:: footer"></div>
+		</div>
+		<!-- End of Content Wrapper -->
+
+	</div>
+	<!-- End of Page Wrapper -->
+
+	<!-- Scroll to Top Button-->
+	<a class="scroll-to-top rounded" href="#page-top"> <i class="fas fa-angle-up"></i>
+	</a>
+
+
+	<script th:src="@{/assets/admin/vendor/jquery/jquery.min.js}"></script>
+	<script th:src="@{/assets/admin/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+
+
+	<script th:src="@{/assets/admin/vendor/jquery-easing/jquery.easing.min.js}"></script>
+
+
+	<script class="custom-script" th:src="@{/assets/admin/js/sb-admin-2.min.js}"></script>
+
+
+
+</body>
+
+</html>
