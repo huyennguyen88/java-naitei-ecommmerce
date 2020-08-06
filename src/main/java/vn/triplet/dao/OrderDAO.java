@@ -1,6 +1,7 @@
 
 package vn.triplet.dao;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import vn.triplet.model.Order;
@@ -10,5 +11,6 @@ public interface OrderDAO extends BaseDAO<Integer, Order> {
 	List<Order> loadOrders();
 	
 	List<Order> loadOrdersByStatus(Status status);
-	
+
+	BigDecimal getTotalRevenue();
 }

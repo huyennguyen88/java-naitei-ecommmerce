@@ -6,7 +6,6 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import vn.triplet.service.impl.UserServiceImpl;
-import vn.triplet.model.Order;
 import vn.triplet.model.User;
 import vn.triplet.model.User.Role;
 import vn.triplet.service.UserService;
@@ -105,6 +104,11 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
 		} catch (Exception e) {
 			throw e;
 		}
+	}
+
+	@Override
+	public List<User> loadUsers(Role role) {
+		return getUserDAO().loadUsers(role);
 	}
 
 }
