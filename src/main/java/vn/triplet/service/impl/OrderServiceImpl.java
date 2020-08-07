@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import vn.triplet.dao.OrderDAO;
 import vn.triplet.dao.OrderItemDAO;
 import vn.triplet.dao.ProductDAO;
+import vn.triplet.helper.Converter;
 import vn.triplet.model.Order;
 import vn.triplet.model.OrderItem;
 import vn.triplet.model.Product;
@@ -22,13 +23,13 @@ public class OrderServiceImpl extends BaseServiceImpl implements OrderService {
 
 	@Autowired
 	private OrderDAO orderDAO;
-	
+
 	@Autowired
 	private OrderItemDAO orderItemDAO;
-	
+
 	@Autowired
 	private ProductDAO productDAO;
-	
+
 	public OrderDAO getOrderDAO() {
 		return orderDAO;
 	}
@@ -36,6 +37,7 @@ public class OrderServiceImpl extends BaseServiceImpl implements OrderService {
 	public void setOrderDAO(OrderDAO orderDAO) {
 		this.orderDAO = orderDAO;
 	}
+
 	public OrderItemDAO getOrderItemDAO() {
 		return orderItemDAO;
 	}
@@ -43,6 +45,7 @@ public class OrderServiceImpl extends BaseServiceImpl implements OrderService {
 	public void setOrderItemDAO(OrderItemDAO orderItemDAO) {
 		this.orderItemDAO = orderItemDAO;
 	}
+
 	public ProductDAO getProductDAO() {
 		return productDAO;
 	}
@@ -50,6 +53,7 @@ public class OrderServiceImpl extends BaseServiceImpl implements OrderService {
 	public void setProductDAO(ProductDAO productDAO) {
 		this.productDAO = productDAO;
 	}
+
 	private static final Logger logger = Logger.getLogger(OrderServiceImpl.class);
 
 	@Override
@@ -83,7 +87,7 @@ public class OrderServiceImpl extends BaseServiceImpl implements OrderService {
 	}
 
 	@Override
-	public boolean createOrder(Order order,HashMap<Integer,Integer> items, User user) {
+	public boolean createOrder(Order order, HashMap<Integer, Integer> items, User user) {
 		try {
 			order.setStatus(Status.PENDING);
 			order.setUser(user);
@@ -141,6 +145,18 @@ public class OrderServiceImpl extends BaseServiceImpl implements OrderService {
 			break;
 		}
 		;
+		return getOrderDAO().loadOrdersByStatus(status);
+
+	}
+
+	@Override
+	public String getTotalRevenue() {
+		BigDecimal totalRevenue =  getOrderDAO().getTotalRevenue();
+		return Converter.convertPriceFromBigDecimalToString(totalRevenue);
+	}
+	
+	@Override
+	public List<Order> loadOrdersByStatus(Status status) {
 		return getOrderDAO().loadOrdersByStatus(status);
 
 	}

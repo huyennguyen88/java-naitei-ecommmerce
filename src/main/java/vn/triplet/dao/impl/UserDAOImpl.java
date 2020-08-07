@@ -6,8 +6,8 @@ import org.apache.log4j.Logger;
 import org.hibernate.SessionFactory;
 import vn.triplet.dao.GenericDAO;
 import vn.triplet.dao.UserDAO;
-import vn.triplet.model.Order;
 import vn.triplet.model.User;
+import vn.triplet.model.User.Role;
 
 public class UserDAOImpl extends GenericDAO<Integer, User> implements UserDAO {
 	Logger logger = Logger.getLogger(UserDAOImpl.class);
@@ -19,7 +19,6 @@ public class UserDAOImpl extends GenericDAO<Integer, User> implements UserDAO {
 	public UserDAOImpl(SessionFactory sessionFactory) {
 		setSessionFactory(sessionFactory);
 	}
-	
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -42,5 +41,11 @@ public class UserDAOImpl extends GenericDAO<Integer, User> implements UserDAO {
 			return true;
 		return false;
 	}
-	
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<User> loadUsers(Role role) {
+		return getSession().createQuery("from User where role=: role").setParameter("role", role).getResultList();
+	}
+
 }

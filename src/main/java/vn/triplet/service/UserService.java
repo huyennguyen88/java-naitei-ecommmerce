@@ -2,8 +2,8 @@ package vn.triplet.service;
 
 import java.util.List;
 
-import vn.triplet.model.Order;
 import vn.triplet.model.User;
+import vn.triplet.model.User.Role;
 
 public interface UserService extends BaseService<Integer, User> {
 
@@ -17,5 +17,5 @@ public interface UserService extends BaseService<Integer, User> {
 
 	boolean deleteUser(Integer id);
 	
-	
+	List<User> loadUsers(Role role);
 }

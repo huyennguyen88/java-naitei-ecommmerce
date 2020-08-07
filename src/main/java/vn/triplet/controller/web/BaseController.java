@@ -11,9 +11,9 @@ import vn.triplet.service.UserService;
 public abstract class BaseController {
 
 	@Autowired
-	private UserService userService;
+	protected UserService userService;
 
-	User loadCurrentUser(HttpServletRequest request) {
+	protected User loadCurrentUser(HttpServletRequest request) {
 
 		HttpSession session = request.getSession();
 		Object userId =  session.getAttribute("currentUser");
